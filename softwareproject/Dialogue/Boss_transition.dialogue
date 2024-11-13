@@ -1,0 +1,12 @@
+~ start
+Voices: "Come... rest your weary head."
+Voices: "This bed has seen many travelers before you... few have returned."
+Voices: "Are you truly ready for what awaits? Once you close your eyes, this place will be only a memory."
+Voices: "Make your choice... stay in comfort, or drift into the unknown."
+- "I'm ready. I need to move forward."
+	Voices: "You feel a weight lift as you lie down, but a sense of finality settles over you."
+	Voices: "There is no going back. When you wake, the world will be... different."
+	do Globals.transition_to_boss_room.emit()
+- "Wait, I don't know if I'm ready."
+	Voices: "Hesitate, if you wish. But know, the journey will only begin once you rest.".  => END
+=> END

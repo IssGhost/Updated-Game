@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://p63yodn8v50x"]
+
+[ext_resource type="Texture2D" uid="uid://x54i0qq8lois" path="res://Assets/Imported Free Assets/0x72_DungeonTilesetII_v1.7/0x72_DungeonTilesetII_v1.7.png" id="1_yfe7i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r72me"]
+atlas = ExtResource("1_yfe7i")
+region = Rect2(384, 462, 16, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8onr"]
+atlas = ExtResource("1_yfe7i")
+region = Rect2(400, 462, 16, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pou27"]
+atlas = ExtResource("1_yfe7i")
+region = Rect2(416, 462, 16, 42)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r72me")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8onr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pou27")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

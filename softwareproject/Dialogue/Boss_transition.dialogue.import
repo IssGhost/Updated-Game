@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://dsx4ue3sapes8"
+path="res://.godot/imported/Boss_transition.dialogue-a30cbb6044b4d1e114897507ab570a09.tres"
+
+[deps]
+
+source_file="res://Dialogue/Boss_transition.dialogue"
+dest_files=["res://.godot/imported/Boss_transition.dialogue-a30cbb6044b4d1e114897507ab570a09.tres"]
+
+[params]
+
+defaults=true

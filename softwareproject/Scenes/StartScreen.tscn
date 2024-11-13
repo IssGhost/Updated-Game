@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbyrnasiw3fqm"]
+
+[ext_resource type="Script" path="res://scripts/StartScreen.gd" id="1_aa1f7"]
+[ext_resource type="Texture2D" uid="uid://cxsi3or3jaifm" path="res://Assets/Nightmare_Spawn_Castle_Entrance1.png" id="1_c1yxj"]
+[ext_resource type="AudioStream" uid="uid://ccrae5udwxmtj" path="res://Sounds/horror-258261.mp3" id="3_5lk1y"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aa1f7")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_c1yxj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -109.0
+offset_top = -249.0
+offset_right = 109.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1, 5)
+theme_override_constants/separation = 12
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SoundButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5lk1y")
+volume_db = -20.0

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7k0prustqspi"]
+
+[ext_resource type="SpriteFrames" uid="uid://bg2406wuj54oe" path="res://Scenes/Heart.tres" id="1_e1aoj"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+position = Vector2(8, 8)
+sprite_frames = ExtResource("1_e1aoj")
+animation = &"Half"
