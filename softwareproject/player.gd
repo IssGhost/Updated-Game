@@ -11,7 +11,8 @@ signal health_changed(new_health)  # Signal to notify health changes
 @export var speed = 1000
 @export var attack_damage = 10
 @export var max_health: int = 500
-
+@export var dodge_duration: float = 1.0
+@export var dodge_speed_multiplier: float = 2.0
 @onready var actionable_finder: Area2D = $Direction/ActionableFinder
 @onready var gun = $Node2D/ArGun
 @export var gun_fire_scene: PackedScene = preload("res://Scenes/gun_fire.tscn")
@@ -19,6 +20,7 @@ signal health_changed(new_health)  # Signal to notify health changes
 var current_dir = "none"
 var is_attacking = false
 var is_hurt = false
+var is_dodging: bool = false
 var current_health: int = max_health
 
 func _ready():
@@ -36,12 +38,15 @@ func _physics_process(delta):
 	if not is_attacking and not is_hurt:
 		player_movement(delta)
 
+
 var gamestart_initial_direction = false
 
 func player_movement(delta):
 	if gamestart_initial_direction == false:
 		current_dir = "down"
 		gamestart_initial_direction = true
+
+	# Handle directional input
 	if Input.is_action_pressed("ui_right"):
 		current_dir = "right"
 		velocity = Vector2(speed, 0)
@@ -57,12 +62,15 @@ func player_movement(delta):
 	else:
 		velocity = Vector2.ZERO
 
+	# Adjust animations based on movement state
 	if velocity != Vector2.ZERO:
 		play_movement_animation()
 	else:
 		play_idle_animation()
 
 	move_and_slide()
+
+
 
 func play_movement_animation():
 	if is_attacking or is_hurt:
@@ -79,7 +87,7 @@ func play_movement_animation():
 			anim.play("back_walk")
 
 func play_idle_animation():
-	if is_attacking or is_hurt:
+	if is_attacking or is_hurt or is_dodging:
 		return
 	match current_dir:
 		"right":
@@ -96,6 +104,8 @@ func _input(event):
 		attack()
 	if event.is_action_pressed("shoot"):  # Define "shoot" in your input map
 		shoot_gun()
+	if event.is_action_pressed("dodge") and not is_dodging:  # Add dodge input
+		start_dodge()
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -108,8 +118,44 @@ func _unhandled_input(_event: InputEvent) -> void:
 			actionables[0].action()
 			return
 			
-			
+func start_dodge():
+	if is_dodging:
+		return
+
+	is_dodging = true
+	#self.modulate = Color(0, 0, 0, 0.5)  # Set to shadow-like appearance
+	hurt_box.set("disabled", true)  # Disable hurtbox collision
+	speed *= dodge_speed_multiplier  # Temporarily increase speed
+	anim.stop()
+	match current_dir:
+		"right":
+			anim.play("right_dodge")
+		"left":
+			anim.play("left_dodge")
+		"down":
+			anim.play("front_dodge")
+		"up":
+			anim.play("back_dodge")
+
+	var dodge_timer = Timer.new()
+	dodge_timer.wait_time = dodge_duration
+	dodge_timer.one_shot = true
+	add_child(dodge_timer)
+	dodge_timer.connect("timeout", Callable(self, "_end_dodge"))
+	dodge_timer.start()
+
+func _end_dodge():
+	if is_dodging:
+		self.modulate = Color(1, 1, 1, 1)  # Reset modulation
+		is_dodging = false
+		hurt_box.set("disabled", false)  # Re-enable hurtbox collision
+		speed /= dodge_speed_multiplier  # Reset speed
+
+	
 func shoot_gun():
+	if is_dodging:
+		return
+		
 	if gun == null:
 		print("Error: Gun node not found.")
 		return
@@ -134,7 +180,7 @@ func shoot_gun():
 	get_tree().current_scene.add_child(bullet)
 	
 func attack():
-	if is_attacking or is_hurt:
+	if is_attacking or is_hurt or is_dodging:
 		return
 	is_attacking = true
 
@@ -161,13 +207,23 @@ func _on_attack_timer_timeout():
 	attack_box.set("enabled", false)
 
 func _on_animation_finished(animation_name: String):
-	if animation_name.ends_with("attack"):
+	if animation_name.ends_with("dodge"):
+		if is_dodging:  # Safety check
+			print("Resetting modulation from animation.")
+			sprite.modulate = Color(1, 1, 1, 1)  # Reset modulation
+			is_dodging = false
+			hurt_box.set("disabled", false)  # Re-enable hurtbox collision
+			speed /= dodge_speed_multiplier  # Reset speed to normal
+	elif animation_name.ends_with("attack"):
 		is_attacking = false
 		attack_box.set("enabled", false)
 	elif animation_name.ends_with("hurt"):
 		is_hurt = false
 
-	play_idle_animation()
+	# Play idle animation if no state is active
+	if not is_attacking and not is_hurt and not is_dodging:
+		play_idle_animation()
+
 
 func _on_attack_box_body_entered(body):
 	if body.has_method("take_damage") and is_attacking:

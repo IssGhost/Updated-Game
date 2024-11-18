@@ -433,9 +433,10 @@ modulate = Color(1, 1, 1, 0.705882)
 texture = ExtResource("6")
 
 [node name="AnimatedSprite2D" parent="." index="2"]
+visible = false
 sprite_frames = SubResource("17")
 animation = &"jump"
-frame_progress = 0.456177
+frame = 5
 
 [node name="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, 3)
@@ -464,6 +465,5 @@ script = ExtResource("5")
 position = Vector2(0, 3)
 rotation = 1.5708
 shape = SubResource("23")
-disabled = true
 
 [connection signal="timeout" from="JumpTimer" to="FiniteStateMachine" method="_on_JumpTimer_timeout"]

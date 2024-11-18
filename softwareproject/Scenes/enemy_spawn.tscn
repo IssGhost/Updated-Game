@@ -9,7 +9,7 @@ script = ExtResource("1_xbeva")
 [node name="SpawnAnimation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_7wgpj")
-frame = 22
+frame = 27
 frame_progress = 1.0
 
 [connection signal="animation_finished" from="SpawnAnimation" to="." method="_on_SpawnAnimation_animation_finished"]

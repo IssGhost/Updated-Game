@@ -319,19 +319,23 @@ func spawn_enemies_in_room(room: Room):
 	var enemy_count = randi_range(3, 6)
 
 	for i in range(enemy_count):
+		# Get a random position within the room's bounds
 		var spawn_x = int(randf_range(room.rect.position.x + 1, room.rect.position.x + room.rect.size.x - 1))
 		var spawn_y = int(randf_range(room.rect.position.y + 1, room.rect.position.y + room.rect.size.y - 1))
 
+		# Select an enemy scene based on probability
 		var enemy_scene = choose_enemy_based_on_probability()
 
 		if enemy_scene != null:
-			var enemy_instance = enemy_scene.instantiate()
-			enemy_instance.position = Vector2(spawn_x, spawn_y) * 32
-			room.add_enemy(enemy_instance)  # Add enemy to the room
-			enemy_instance.call_deferred("connect", "defeated", Callable(self, "_on_enemy_defeated"))
-			add_child(enemy_instance)
+			# Instance the spawn animation and position it
+			var spawn_instance = enemy_spawn_scene.instantiate()
+			spawn_instance.position = Vector2(spawn_x, spawn_y) * 32
+			add_child(spawn_instance)  # Add the spawn animation to the scene
 
-			print("Spawned enemy in room", room.id, "at position:", enemy_instance.position)
+			# Start the spawn process with the enemy scene
+			spawn_instance.start_spawn_process(enemy_scene)
+
+			print("Spawn animation triggered in room", room.id, "at position:", spawn_instance.position)
 		else:
 			print("Error: No valid enemy scene to instantiate.")
 
@@ -339,21 +343,23 @@ func spawn_enemies_in_room(room: Room):
 	print("Enemies in room", room.id, ":", room.get_enemy_list())
 
 
+func _on_spawn_animation_finished(spawn_instance, room):
+	if not spawn_instance.enemy_scene:
+		print("Error: Enemy scene is null!")
+		return
 
+	# Instance the enemy at the spawn animation's position
+	var enemy_instance = spawn_instance.enemy_scene.instantiate()
+	enemy_instance.position = spawn_instance.position
+	room.add_enemy(enemy_instance)  # Add the enemy to the room's tracking
+	enemy_instance.call_deferred("connect", "defeated", Callable(self, "_on_enemy_defeated"))
+	add_child(enemy_instance)
 
-# Assuming `spawn_instance` is the spawn animation and `enemy_instance` is the actual enemy
-func _on_spawn_animation_finished(spawn_instance):
-	var enemy_instance = spawn_instance.enemy  # Reference to the enemy
-	if enemy_instance:
-		enemy_instance.position = spawn_instance.position
-		# Update the enemy position in the game logic
-		# Optionally, signal or notify the room manager
-		notify_room_about_enemy_position(enemy_instance)
-func notify_room_about_enemy_position(enemy_instance):
-	var room = get_room_for_enemy(enemy_instance)
-	if room:
-		# Update the tracking information here
-		print("Updating position for enemy in room:", room.id, "to", enemy_instance.position)
+	print("Enemy spawned in room:", room.id, "at position:", enemy_instance.position)
+
+	# Clean up the spawn animation
+	spawn_instance.queue_free()
+
 
 
 func get_room_for_area2d(area2d: Area2D) -> Room:
