@@ -2,6 +2,7 @@ extends State
 
 class_name AttackState
 
+
 var attack_range: float = 50.0  # Wraith attack range
 var attack_duration: float = 0.5  # Duration of the attack
 var attack_damage: int = 10  # Damage dealt by the Wraith
@@ -27,14 +28,18 @@ func attack():
 	if abs(direction_to_player.x) > abs(direction_to_player.y):
 		if direction_to_player.x < 0:
 			actor.animator.play("attack_left")
+			actor.sound_effect.play()
 		elif direction_to_player.x > 0:
 			actor.animator.play("attack_right")
+			actor.sound_effect.play()
 	else:
 		# Otherwise, use vertical direction (up or down)
 		if direction_to_player.y < 0:
 			actor.animator.play("attack_up")
+			actor.sound_effect.play()
 		elif direction_to_player.y > 0:
 			actor.animator.play("attack_down")
+			actor.sound_effect.play()
 
 	# Deal damage if the player is within range
 	if actor.global_position.distance_to(actor.player.global_position) <= attack_range:

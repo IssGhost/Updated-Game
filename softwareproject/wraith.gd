@@ -22,6 +22,7 @@ var current_direction: Vector2 = Vector2.ZERO
 
 # References to necessary nodes
 @onready var animator: AnimationPlayer = $AnimationPlayer
+@onready var sound_effect: AudioStreamPlayer2D = $BaseAttack
 @onready var invul_timer: Timer = $Invultimer
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_box: Area2D = $AttackBox  # Reference to the AttackBox node

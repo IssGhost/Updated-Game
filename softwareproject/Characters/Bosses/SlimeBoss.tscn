@@ -420,6 +420,7 @@ height = 8.0
 [node name="SlimeBoss" instance=ExtResource("1")]
 scale = Vector2(8, 8)
 script = ExtResource("8")
+max_health = 100
 jump_force = 300.0
 max_hp = 8
 hp = 8

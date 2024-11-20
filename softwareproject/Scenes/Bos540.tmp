@@ -1371,7 +1371,6 @@ zoom = Vector2(14, 14)
 [node name="SlimeBoss" parent="." instance=ExtResource("5_rphke")]
 position = Vector2(635, 342)
 scale = Vector2(2, 2)
-max_health = 100
 
 [node name="Objects" type="Node2D" parent="."]
 position = Vector2(632, 10)
@@ -1392,17 +1391,7 @@ position = Vector2(633, 176)
 rotation = 3.14159
 scale = Vector2(0.52, 0.52)
 
-[node name="BossHealthBar" type="CanvasLayer" parent="."]
-
-[node name="HealthBar" type="ProgressBar" parent="BossHealthBar"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -960.0
-offset_right = -956.0
-offset_bottom = 27.0
-grow_horizontal = 2
-fill_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [connection signal="body_entered" from="Spike/Area2D12" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D11" to="Spike" method="_on_area_2d_body_entered"]
@@ -1421,4 +1410,3 @@ fill_mode = 1
 [editable path="player/AttackBox"]
 [editable path="player/Hurtbox"]
 [editable path="player/Node2D/ArGun"]
-[editable path="SlimeBoss"]

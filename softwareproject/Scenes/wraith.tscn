@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b66tdo2ww7rjn"]
+[gd_scene load_steps=38 format=3 uid="uid://b66tdo2ww7rjn"]
 
 [ext_resource type="Script" path="res://wraith.gd" id="1_4dkov"]
 [ext_resource type="Texture2D" uid="uid://b3d521x5xiew2" path="res://Monster Creature Pack/wraith.png" id="2_11826"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/wraith_attack_state.gd" id="8_jag6e"]
 [ext_resource type="Script" path="res://wraith_die_state.gd" id="9_23gbg"]
 [ext_resource type="Script" path="res://scripts/wraith_follow_state.gd" id="10_p7jnn"]
+[ext_resource type="AudioStream" uid="uid://cxpil641mvdp6" path="res://Sounds/slash-21834.mp3" id="15_8y8vk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mgog"]
 size = Vector2(16, 28.5)
@@ -897,6 +898,9 @@ libraries = {
 }
 
 [node name="DeathTimer" type="Timer" parent="."]
+
+[node name="BaseAttack" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_8y8vk")
 
 [connection signal="area_entered" from="Pivot/AttackBox" to="." method="_on_attack_box_entered"]
 [connection signal="area_exited" from="Pivot/AttackBox" to="." method="_on_attack_box_exited"]

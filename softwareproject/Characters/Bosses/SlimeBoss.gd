@@ -1,7 +1,17 @@
 extends Enemy
 
+@export var max_health: int = 100
+var current_health: int
+
+signal health_changed(new_health)
+
 @export var jump_force: float = 300  # Adjust as necessary
 
+
+func _ready():
+	current_health = max_health
+	
+	
 func _process(_delta: float) -> void:
 	if is_instance_valid(player):
 		if player.global_position.y > global_position.y:
