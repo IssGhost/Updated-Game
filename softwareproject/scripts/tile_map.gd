@@ -299,8 +299,8 @@ var wraith_scene = preload("res://wraith.tscn")
 var firey_scene = preload("res://fire_ball.tscn")
 # Dictionary for enemy spawn probabilities (adjustable values)
 var enemy_probabilities = {
-	"Wraith": 1.0,  # 30% chance to spawn a Wraith
-	"Firey": 0.0,   # Currently set to 0% as a placeholder (set to the desired probability later)
+	"Wraith": 0.1,  # 30% chance to spawn a Wraith
+	"Firey": 0.9,   # Currently set to 0% as a placeholder (set to the desired probability later)
 	"Zombie": 0.0   # Currently set to 0% as a placeholder (set to the desired probability later)
 }
 

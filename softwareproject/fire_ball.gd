@@ -1,4 +1,5 @@
 extends CharacterBody2D
+
 signal defeated  # Define the defeated signal
 
 # Health properties
@@ -16,22 +17,18 @@ var player_in_attack_range: bool = false
 var last_direction: Vector2 = Vector2.DOWN
 var current_direction: Vector2 = Vector2.ZERO
 @export var min_distance_to_player: float = 100.0
+@export var attack_range: float = 100.0
+var player: Node2D = null
+var player_in_range: bool = false
+
+# Nodes and helpers
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var invul_timer: Timer = $Invultimer
 @onready var detection_area: Area2D = $DetectionArea
 @onready var attack_box: Area2D = $AttackBox
 @onready var fsm = $FiniteStateMachine
-var player: Node2D = null
-var player_in_range: bool = false
-@export var attack_range: float = 100.0
-
 
 func _ready():
-	#if attack_box:
-		#attack_box.connect("body_entered", Callable(self, "_on_attack_box_entered"))
-		#attack_box.connect("body_exited", Callable(self, "_on_attack_box_exited"))
-		#print("Connected attack box signals")
-		
 	add_to_group("enemy")  # Add to an enemy group if needed
 	current_health = max_health
 
@@ -55,13 +52,12 @@ func _ready():
 		detection_area.connect("body_entered", Callable(self, "_on_detection_area_entered"))
 		detection_area.connect("body_exited", Callable(self, "_on_detection_area_exited"))
 
-
 func _physics_process(delta: float):
 	# Confirm FSM processing and add debug to track
 	if fsm:
 		fsm._physics_process(delta)
 
-
+	move_and_update_direction(delta)
 
 func move_and_update_direction(delta: float):
 	if current_direction != Vector2.ZERO:
@@ -115,7 +111,6 @@ func take_damage(amount: int):
 		if fsm and fsm.has_method("transition"):
 			fsm.transition("HurtState")
 
-# Function to check if the player is in range
 func is_player_in_range() -> bool:
 	return player_in_range
 
@@ -131,10 +126,9 @@ func _on_death_timer_timeout():
 	print("Death timer completed. Queue freeing the Firey.")
 	queue_free()  # Remove the Firey from the scene
 
-# Invulnerability timer timeout handler
 func _on_invul_timer_timeout():
 	is_invulnerable = false
-	print("Firey is no longer invulnerable")
+	print("Firey is no longer invulnerable.")
 
 func _on_detection_area_entered(body: Node):
 	if body.is_in_group("player"):
@@ -150,17 +144,15 @@ func _on_detection_area_exited(body: Node):
 func _on_attack_box_entered(body: Node):
 	if body.is_in_group("player"):
 		player_in_attack_range = true
+		fsm.transition("AttackState")
 		print("Player entered attack range.")
-	else:
-		print("Non-player body entered:", body.name)
 
 func _on_attack_box_exited(body: Node):
 	if body.is_in_group("player"):
 		player_in_attack_range = false
+		fsm.transition("RunState")
 		print("Player exited attack range.")
 
-
-# Function to turn the Wraith to face the player
 func turn_to_player():
 	if player:
 		var direction_to_player = (player.global_position - global_position).normalized()
@@ -168,4 +160,4 @@ func turn_to_player():
 			last_direction = Vector2.RIGHT if direction_to_player.x > 0 else Vector2.LEFT
 		else:
 			last_direction = Vector2.DOWN if direction_to_player.y > 0 else Vector2.UP
-		print("Wraith is now facing the player")
+		print("Wraith is now facing the player.")

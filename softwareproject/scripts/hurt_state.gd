@@ -57,9 +57,14 @@ func _on_hurt_timer_timeout():
 	if actor.current_health > 0:
 		# Check if the player is within attack range upon recovering from hurt
 		if actor.player_in_attack_range:
-			transition.emit("RunState")  # Re-enter AttackState if still in range
+			print("Recovered from HurtState, transitioning to AttackState")
+			transition.emit("AttackState")
+		elif actor.player_in_range:
+			print("Recovered from HurtState, transitioning to FollowState")
+			transition.emit("FollowState")
 		else:
-			transition.emit("FollowState")  # Otherwise, resume patrol
+			print("Recovered from HurtState, transitioning to RunState")
+			transition.emit("RunState")
 
 
 func _on_hurt_animation_finished(anim_name: String):

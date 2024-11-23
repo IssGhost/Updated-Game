@@ -801,7 +801,8 @@ _data = {
 
 [node name="Wraith" type="CharacterBody2D"]
 scale = Vector2(0.75, 0.75)
-collision_mask = 3
+collision_layer = 256
+collision_mask = 258
 script = ExtResource("1_4dkov")
 invul_duration = 0.2
 
@@ -835,7 +836,7 @@ target_position = Vector2(25, 0)
 collision_mask = 8
 
 [node name="AttackBox" parent="Pivot" node_paths=PackedStringArray("attacker") instance=ExtResource("3_sy5rv")]
-collision_layer = 22
+collision_layer = 150
 collision_mask = 255
 script = ExtResource("4_vqcdm")
 attacker = NodePath("../..")
@@ -845,8 +846,8 @@ position = Vector2(18.8438, -12)
 shape = SubResource("RectangleShape2D_m8kpl")
 
 [node name="Hurtbox" parent="Pivot" node_paths=PackedStringArray("target") instance=ExtResource("4_602jg")]
-collision_layer = 17
-collision_mask = 5
+collision_layer = 160
+collision_mask = 160
 script = ExtResource("6_hnhpm")
 target = NodePath("../..")
 

@@ -9,7 +9,7 @@ signal health_changed(new_health)  # Signal to notify health changes
 @onready var hurt_box: Area2D = $Hurtbox
 @onready var sound_effect = $AudioStreamPlayer2D
 @export var speed = 1000
-@export var attack_damage = 10
+@export var attack_damage = 100
 @export var max_health: int = 500
 @export var dodge_duration: float = 1.0
 @export var dodge_speed_multiplier: float = 2.0

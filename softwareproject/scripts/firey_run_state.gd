@@ -17,12 +17,18 @@ func physics_update(delta: float):
 	# Handle movement and check for collisions
 	move_and_check_for_collisions()
 
-	# Transition to FollowState when player is detected
-	if actor.player_in_range:
-		if actor.global_position.distance_to(actor.player.global_position) <= actor.min_distance_to_player:
-			transition.emit("AttackState")  # Transition to AttackState if close enough to attack
-		else:
-			transition.emit("FollowState")
+	# Transition to AttackState when player is in attack range
+	if actor.player_in_attack_range:
+		print("Player in attack range, transitioning to AttackState")
+		transition.emit("AttackState")
+		return
+
+	# Transition to FollowState when player is in detection range but not attack range
+	if actor.player_in_range  && not actor.player_in_attack_range:
+		print("Player detected but not in attack range, transitioning to FollowState")
+		transition.emit("FollowState")
+		return
+
 
 # Function to move the wraith and check for collisions
 func move_and_check_for_collisions():
