@@ -26,6 +26,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBox/WindowMode"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 34
 text = "Fullscreen"
 
 [node name="WindowModeSelect" type="OptionButton" parent="VBox/WindowMode"]
@@ -38,6 +39,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="VBox/Resolution"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 34
 text = "Resolution"
 
 [node name="ResolutionSelect" type="OptionButton" parent="VBox/Resolution"]

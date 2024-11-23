@@ -112,7 +112,7 @@ disabled = false
 visible = false
 
 [node name="Camera2D2" type="Camera2D" parent="TileMap/player"]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(4, 4)
 
 [node name="Area2DContainer" type="Node" parent="TileMap"]
 
