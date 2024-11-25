@@ -2,7 +2,7 @@ extends State
 
 class_name FollowState
 
-var speed: float = 75.0  # Speed when following the player
+var speed: float = 30.0  # Speed when following the player
 
 func enter_state(_previous_state: State):
 	#print("Entering FollowState")

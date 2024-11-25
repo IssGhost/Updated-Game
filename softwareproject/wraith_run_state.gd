@@ -1,6 +1,6 @@
 extends State
 
-var speed: float = 100.0
+var speed: float = 30.0
 var direction: Vector2 = Vector2.ZERO
 
 # RunState.gd

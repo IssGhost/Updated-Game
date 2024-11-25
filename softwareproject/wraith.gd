@@ -6,7 +6,7 @@ signal defeated
 var current_health: int = max_health
 
 # Movement speed of the wraith
-@export var speed: float = 100.0
+@export var speed: float = 30.0
 
 # Invulnerability duration (in seconds)
 @export var invul_duration: float = 1.0
@@ -18,7 +18,7 @@ var last_direction: Vector2 = Vector2.DOWN
 var current_direction: Vector2 = Vector2.ZERO
 
 # Minimum distance to consider the player too close
-@export var min_distance_to_player: float = 100.0
+@export var min_distance_to_player: float = 20.0
 
 # References to necessary nodes
 @onready var animator: AnimationPlayer = $AnimationPlayer

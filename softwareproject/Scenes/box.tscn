@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://ckbp7wg4m12r"]
+
+[ext_resource type="Script" path="res://scripts/box.gd" id="1_3l68l"]
+[ext_resource type="Texture2D" uid="uid://e2mqnayvmmnj" path="res://Assets/Destructible Objects Sprite Sheet.png" id="2_lnrux"]
+[ext_resource type="Script" path="res://scripts/box_damage_detection.gd" id="3_dmjmy"]
+[ext_resource type="PackedScene" uid="uid://du3d4uftlgwlq" path="res://Scenes/hurtbox.tscn" id="3_p1blk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m33ol"]
+atlas = ExtResource("2_lnrux")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ndbq"]
+atlas = ExtResource("2_lnrux")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjfy0"]
+atlas = ExtResource("2_lnrux")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5svqo"]
+atlas = ExtResource("2_lnrux")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ijkn"]
+atlas = ExtResource("2_lnrux")
+region = Rect2(384, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nkgfq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m33ol")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ndbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjfy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5svqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ijkn")
+}],
+"loop": false,
+"name": &"destroyed",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82qpn"]
+size = Vector2(16.75, 21)
+
+[node name="Box" type="Node2D"]
+script = ExtResource("1_3l68l")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="StaticBody2D"]
+sprite_frames = SubResource("SpriteFrames_nkgfq")
+animation = &"destroyed"
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(2, 9)
+shape = SubResource("RectangleShape2D_82qpn")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_p1blk")]
+position = Vector2(2, 23)
+collision_layer = 177
+collision_mask = 255
+script = ExtResource("3_dmjmy")
+target = NodePath("..")

@@ -8,7 +8,7 @@ signal health_changed(new_health)  # Signal to notify health changes
 @onready var attack_box: Area2D = $AttackBox
 @onready var hurt_box: Area2D = $Hurtbox
 @onready var sound_effect = $AudioStreamPlayer2D
-@export var speed = 1000
+@export var speed = 100
 @export var attack_damage = 100
 @export var max_health: int = 500
 @export var dodge_duration: float = 1.0
@@ -117,6 +117,12 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 			actionables[0].action()
 			return
+	if Input.is_action_just_pressed("selectable"):  # Ensure "selectable" is mapped to "E" in Input Map
+		var actionables = actionable_finder.get_overlapping_areas()  # Get areas overlapping with the player's finder
+		for area in actionables:
+			if area.collision_layer == 16:  # Check if the object is in the selectable layer
+				print("Interacting with selectable object!")
+				area.action()  # Call a custom action method on the object, if it exists
 			
 func start_dodge():
 	if is_dodging:

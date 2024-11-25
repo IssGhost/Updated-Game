@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dxveuoeu30asw"]
+[gd_scene load_steps=31 format=3 uid="uid://dxveuoeu30asw"]
 
 [ext_resource type="PackedScene" uid="uid://b4wpmxmaqv5sv" path="res://Scenes/basic_enemy.tscn" id="1_arptl"]
 [ext_resource type="Script" path="res://fire_ball.gd" id="2_7wm8j"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/firey_die_state.gd" id="6_whyo4"]
 [ext_resource type="Script" path="res://scripts/firey_run_state.gd" id="8_55w20"]
 [ext_resource type="Script" path="res://scripts/hurt_state.gd" id="9_ck3bw"]
+[ext_resource type="Texture2D" uid="uid://c56xu5t2tiwy2" path="res://Assets/wizard_spritesheet.png" id="11_y5s0v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2544"]
 radius = 5.02494
@@ -57,6 +58,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.25]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
 }
 
 [sub_resource type="Animation" id="Animation_xdl66"]
@@ -371,10 +384,10 @@ tracks/1/keys = {
 resource_name = "walk_up"
 length = 0.6
 loop_mode = 1
-step = 0.03
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -395,6 +408,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0.25, 0.25, 0.25, 0.25, 0.25, 0.3, 0.234247, 0.25, 0.2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lywi1"]
@@ -488,6 +513,12 @@ libraries = {
 visible = false
 texture = ExtResource("3_11riw")
 texture_scale = 0.25
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="9"]
+texture = ExtResource("11_y5s0v")
+hframes = 10
+vframes = 3
+frame = 10
 
 [connection signal="body_entered" from="Pivot/AttackBox" to="." method="_on_attack_box_entered"]
 [connection signal="body_exited" from="Pivot/AttackBox" to="." method="_on_attack_box_exited"]

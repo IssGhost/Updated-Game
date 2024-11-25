@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://du3d4uftlgwlq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g3x2h"]
-radius = 21.8376
-height = 53.8686
+radius = 13.0
+height = 26.0
 
 [node name="Hurtbox" type="Area2D"]
 collision_layer = 16

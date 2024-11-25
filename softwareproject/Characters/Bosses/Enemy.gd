@@ -1,9 +1,8 @@
-@icon("res://Art/v1.1 dungeon crawler 16x16 pixel pack/enemies/goblin/goblin_idle_anim_f0.png")
 
 extends Character
 class_name Enemy
 
-@onready var player: CharacterBody2D = get_tree().current_scene.get_node("Player")
+@onready var player: CharacterBody2D = get_tree().current_scene.get_node("player")
 @onready var path_timer: Timer = get_node("PathTimer")
 @onready var navigation_agent: NavigationAgent2D = get_node("NavigationAgent2D")
 
