@@ -1,42 +1,17 @@
 extends Area2D
 class_name Hitbox
 
-@export var damage: int = 1
-var knockback_direction: Vector2 = Vector2.ZERO
-@export var knockback_force: int = 300
+@export var target : CharacterBody2D
 
-var body_inside: bool = false
+func _on_area_entered(area : Area2D):
+	# Debug print to check when this function is called
+	print("Area entered: ", area.name)
 
-@onready var collision_shape: CollisionShape2D = get_child(0)
-@onready var timer: Timer = Timer.new()
-
-
-func _init() -> void:
-	var __ = connect("body_entered", Callable(self, "_on_body_entered"))
-	__ = connect("body_exited", Callable(self, "_on_body_exited"))
-
-
-func _ready() -> void:
-	assert(collision_shape != null)
-	timer.wait_time = 1
-	add_child(timer)
-
-
-func _on_body_entered(body: Node2D) -> void:
-	body_inside = true
-	timer.start()
-	while body_inside:
-		_collide(body)
-		await timer.timeout
-
-
-func _on_body_exited(_body: Node2D) -> void:
-	body_inside = false
-	timer.stop()
-
-
-func _collide(body: Node2D) -> void:
-	if body == null or not body.has_method("take_damage"):
-		queue_free()
+	# Check if the area has a get_damage_amount method and handle damage properly
+	if area.has_method("get_damage_amount"):
+		var damage = area.get_damage_amount()
+		print("Damage amount: ", damage)
+		target.take_damage(damage)
 	else:
-		body.take_damage(damage, knockback_direction, knockback_force)
+		#print("Error: The area does not have a get_damage_amount method")
+		pass

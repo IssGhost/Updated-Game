@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dcn7m7f3npdg0"]
+[gd_scene load_steps=28 format=3 uid="uid://dcn7m7f3npdg0"]
 
 [ext_resource type="Script" path="res://Scenes/boss_roomtest_transition.gd" id="1_6306b"]
 [ext_resource type="Texture2D" uid="uid://x54i0qq8lois" path="res://Assets/Imported Free Assets/0x72_DungeonTilesetII_v1.7/0x72_DungeonTilesetII_v1.7.png" id="1_kqx0l"]
@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://ckbp7wg4m12r" path="res://Scenes/box.tscn" id="14_p5tr1"]
 [ext_resource type="PackedScene" uid="uid://erblgpr62p4j" path="res://Scenes/Slime_Boss.tscn" id="15_j04jn"]
 [ext_resource type="PackedScene" uid="uid://ogmkwqhqmv4m" path="res://Scenes/coin.tscn" id="15_xcj6t"]
-[ext_resource type="PackedScene" uid="uid://b0n6nnxfmc8ab" path="res://Scenes/HealthUI.tscn" id="16_stn0x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5ky2"]
 atlas = ExtResource("1_kqx0l")
@@ -99,11 +98,6 @@ size = Vector2(10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ui0e"]
 size = Vector2(36.6666, 71.6667)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_yea4v"]
-vertices = PackedVector2Array(862.023, 181.969, 862.969, 513.969, 400.938, 513.023, 399.047, 181.023)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(389, 171, 391, 523, 873, 524, 872, 172)])
 
 [node name="BossRoom" type="Node2D"]
 script = ExtResource("1_6306b")
@@ -354,23 +348,6 @@ position = Vector2(141, 6)
 position = Vector2(634, 351)
 scale = Vector2(2, 2)
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_yea4v")
-
-[node name="HealthUI" parent="." instance=ExtResource("16_stn0x")]
-
-[node name="BossHealthBar" parent="HealthUI" index="1"]
-anchor_left = 0.148
-anchor_top = 0.876
-anchor_right = 0.886
-anchor_bottom = 0.876
-offset_left = 150.0
-offset_top = 0.0
-offset_right = -150.0
-offset_bottom = 100.0
-grow_vertical = 0
-show_percentage = false
-
 [connection signal="body_entered" from="Spike/Area2D12" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D11" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D10" to="Spike" method="_on_area_2d_body_entered"]
@@ -383,11 +360,9 @@ show_percentage = false
 [connection signal="body_entered" from="Spike/Area2D3" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D2" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D" to="Spike" method="_on_area_2d_body_entered"]
-[connection signal="health_changed" from="Slimeboss" to="HealthUI" method="_on_slimeboss_health_changed"]
 
 [editable path="player"]
 [editable path="player/AttackBox"]
 [editable path="player/Hurtbox"]
 [editable path="player/Node2D/ArGun"]
 [editable path="Slimeboss"]
-[editable path="HealthUI"]
