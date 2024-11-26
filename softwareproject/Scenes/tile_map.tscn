@@ -111,9 +111,6 @@ disabled = false
 [node name="AnimatedSprite2D" parent="TileMap/player" index="6"]
 visible = false
 
-[node name="Camera2D" parent="TileMap/player" index="12"]
-zoom = Vector2(5, 5)
-
 [node name="Camera2D2" type="Camera2D" parent="TileMap/player"]
 zoom = Vector2(4, 4)
 
@@ -132,6 +129,9 @@ visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="Control" parent="." instance=ExtResource("9_20blq")]
+
+[node name="BossHealthBar" parent="Control" index="1"]
+anchors_preset = 10
 
 [node name="Activatable" parent="Control" instance=ExtResource("10_md75y")]
 offset_left = 17.0

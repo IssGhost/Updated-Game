@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq3wtbkfp4s81"]
+
+[ext_resource type="Script" path="res://scripts/Boss_defeat_transition.gd" id="1_hfj0r"]
+[ext_resource type="Texture2D" uid="uid://dd6aaglcb7n3t" path="res://Assets/Imported Free Assets/0x72_DungeonTilesetII_v1.7/frames/floor_stairs.png" id="2_77njv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1ym5"]
+size = Vector2(16, 16)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_hfj0r")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_k1ym5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_77njv")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
