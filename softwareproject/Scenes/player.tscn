@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bunoftyokcv2c"]
+[gd_scene load_steps=39 format=3 uid="uid://bunoftyokcv2c"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_menar"]
 [ext_resource type="Texture2D" uid="uid://b3g3dcgdawv1y" path="res://mystic_woods_free_2.2/sprites/characters/player.png" id="2_uwhhb"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cxpil641mvdp6" path="res://Sounds/slash-21834.mp3" id="7_18ufr"]
 [ext_resource type="Texture2D" uid="uid://dy4ps7g1l6udn" path="res://mystic_woods_free_2.2/sprites/characters/player_hands.png" id="10_3ypld"]
 [ext_resource type="PackedScene" uid="uid://c4vd6qifpggws" path="res://Weapons/ar_gun.tscn" id="11_6gihy"]
+[ext_resource type="Script" path="res://scripts/coin_count.gd" id="12_2u2w7"]
 
 [sub_resource type="Animation" id="Animation_4vn2t"]
 length = 0.001
@@ -2078,6 +2079,19 @@ position = Vector2(8, -2.38419e-07)
 shape = SubResource("CircleShape2D_3txba")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1468.0
+offset_top = -1080.0
+offset_right = 1812.0
+offset_bottom = -873.0
+grow_horizontal = 0
+scale = Vector2(5, 5)
+text = "Coin: "
+script = ExtResource("12_2u2w7")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 

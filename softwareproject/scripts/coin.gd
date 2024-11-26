@@ -11,4 +11,5 @@ func _ready() -> void:
 func _on_body_entered(body:Node):
 	if body.is_in_group("player"):
 		print("player collided with the coin!")
+		body.collect_coin()
 		queue_free()

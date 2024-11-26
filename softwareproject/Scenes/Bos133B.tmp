@@ -298,19 +298,6 @@ visible = false
 [node name="Camera2D" parent="player" index="12"]
 zoom = Vector2(10, 10)
 
-[node name="Label" parent="player" index="13"]
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = 88.0
-offset_top = -102.0
-offset_right = 132.0
-offset_bottom = -79.0
-grow_horizontal = 1
-scale = Vector2(1, 1)
-theme_override_font_sizes/font_size = 14
-text = ""
-
 [node name="SlimeBoss" parent="." instance=ExtResource("5_rphke")]
 position = Vector2(635, 342)
 scale = Vector2(2, 2)

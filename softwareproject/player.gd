@@ -41,6 +41,9 @@ func _physics_process(delta):
 
 var gamestart_initial_direction = false
 
+func collect_coin():
+	Globals.add_coin() 
+
 func player_movement(delta):
 	if gamestart_initial_direction == false:
 		current_dir = "down"
