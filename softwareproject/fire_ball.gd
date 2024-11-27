@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal defeated  # Define the defeated signal
 
 # Health properties
-@export var max_health: int = 50
+@export var max_health: int = 20
 var current_health: int = max_health
 
 # Track if the character is dead

@@ -4,7 +4,9 @@ extends Node2D
 @onready var spawn_position: Node2D = $SpawnPosition 
 @onready var area2d: Area2D = $StaticBody2D/Area2D
 
-const ITEM_SCENE_PATH = "res://Scenes/gun_item.tscn"
+const ITEM_SCENE_PATH = "res://Scenes/heart_item.tscn"
+const COINS_REQUIRED_TO_OPEN = 5
+
 var is_open: bool = false  
 var player_in_area: bool = false 
 
@@ -15,9 +17,17 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if player_in_area and Input.is_action_just_pressed("select") and not is_open:
-		open_chest()
+		if can_open_chest():
+			open_chest()
+		else:
+			print("Not enough coins to open the chest.")
 
+func can_open_chest() -> bool:
+	return Globals.coin_count >= COINS_REQUIRED_TO_OPEN
+	
 func open_chest() -> void:
+	Globals.coin_count -= COINS_REQUIRED_TO_OPEN  # Deduct coins
+	print("Chest opened! Remaining coins:", Globals.coin_count)
 	animator.play("open") 
 	is_open = true  
 

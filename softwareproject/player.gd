@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal health_changed(new_health)  # Signal to notify health changes
 
+@onready var dmg_up_label: Label = $Damageup
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var gunanim: AnimationTree = $Node2D/ArGun/AnimationTree
 @onready var sprite: Sprite2D = $Sprite2D
@@ -10,12 +11,24 @@ signal health_changed(new_health)  # Signal to notify health changes
 @onready var sound_effect = $AudioStreamPlayer2D
 @export var speed = 100
 @export var attack_damage = 100
-@export var max_health: int = 500
+@export var max_health: int = 100
 @export var dodge_duration: float = 1.0
 @export var dodge_speed_multiplier: float = 2.0
 @onready var actionable_finder: Area2D = $Direction/ActionableFinder
 @onready var gun = $Node2D/ArGun
 @export var gun_fire_scene: PackedScene = preload("res://Scenes/gun_fire.tscn")
+@onready var reload_label: Label = $Reload
+@onready var reload_timer: Timer = $ReloadTimer
+@export var reload_duration: float = 1.0  
+@onready var health_ui: Node = get_tree().current_scene.get_node("HealthUI") 
+@onready var shoot_timer: Timer = $ShootTimer  
+@export var shoot_interval: float = 0.2 
+@export var Scene_transition: PackedScene = preload("res://Scenes/Scene_transition.tscn")
+
+
+
+var current_ammo: int = Globals.current_ammo  # Track ammo locally
+var max_ammo: int = Globals.max_ammo  # Max ammo capacity
 
 var current_dir = "none"
 var is_attacking = false
@@ -29,6 +42,17 @@ func _ready():
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	add_to_group("player")
 	reset_state()
+	
+	reload_timer.wait_time = reload_duration
+	reload_timer.one_shot = true
+	reload_timer.connect("timeout", Callable(self, "_on_reload_finished"))
+	shoot_timer.wait_time = shoot_interval
+	shoot_timer.one_shot = false
+	shoot_timer.connect("timeout", Callable(self, "_on_shoot_timer_timeout"))
+	# Hide reload label initially
+	reload_label.visible = false
+	
+	attack_damage = Globals.player_attack_damage
 
 func reset_state():
 	is_attacking = false
@@ -37,10 +61,18 @@ func reset_state():
 func _physics_process(delta):
 	if not is_attacking and not is_hurt:
 		player_movement(delta)
+	
+	attack_damage = Globals.player_attack_damage
 
 
 var gamestart_initial_direction = false
 
+
+func _show_dmg_up_label() -> void:
+	dmg_up_label.visible = true
+	await get_tree().create_timer(15.0).timeout  # Show for 1 second
+	dmg_up_label.visible = false
+	
 func collect_coin():
 	Globals.add_coin() 
 
@@ -105,12 +137,20 @@ func play_idle_animation():
 func _input(event):
 	if event.is_action_pressed("attack"):
 		attack()
-	if event.is_action_pressed("shoot"):  # Define "shoot" in your input map
+	if event.is_action_pressed("shoot") and shoot_timer.is_stopped():
 		shoot_gun()
+		shoot_timer.start()
+	elif event.is_action_released("shoot"):
+		shoot_timer.stop()
 	if event.is_action_pressed("dodge") and not is_dodging:  # Add dodge input
 		start_dodge()
+	if event.is_action_pressed("reload"):  # Define "reload" in your Input Map
+		start_reloading()
+		Globals.reload()
 
-
+func _on_shoot_timer_timeout():
+	shoot_gun()
+	
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dialogue"):
 		print("dialouge")
@@ -162,32 +202,41 @@ func _end_dodge():
 
 	
 func shoot_gun():
-	if is_dodging:
-		return
+	if is_dodging or !reload_timer.is_stopped():
+		return  # Prevent shooting while reloading or dodging
+	
+	if Globals.current_ammo > 0:
+		Globals.decrement_ammo()
+		_update_health_ui_ammo_label()
+		# Fire the gun (existing logic here)
+		var bullet = gun_fire_scene.instantiate()
+		match current_dir:
+			"right": bullet.direction = Vector2(1, 0)
+			"left": bullet.direction = Vector2(-1, 0)
+			"down": bullet.direction = Vector2(0, 1)
+			"up": bullet.direction = Vector2(0, -1)
+		bullet.global_position = gun.global_position + bullet.direction * gun.gun_length
+		get_tree().current_scene.add_child(bullet)
+	else:
+		start_reloading()
+
+func start_reloading():
+	if reload_timer.is_stopped():
+		reload_label.visible = true
+		reload_label.text = "Reloading..."
+		reload_timer.start()
+
+func _on_reload_finished():
+	Globals.reload_ammo()
+	_update_health_ui_ammo_label()
+	reload_label.visible = false  # Hide the reloading text
+	
+func _update_health_ui_ammo_label():
+	if health_ui and health_ui.has_method("update_ammo_label"):
+		health_ui.update_ammo_label(Globals.current_ammo)
+	else:
+		print("HealthUI or update_ammo_label() method not found!")
 		
-	if gun == null:
-		print("Error: Gun node not found.")
-		return
-
-	var bullet = gun_fire_scene.instantiate()
-	
-	# Determine bullet direction based on player direction
-	match current_dir:
-		"right":
-			bullet.direction = Vector2(1, 0)
-		"left":
-			bullet.direction = Vector2(-1, 0)
-		"down":
-			bullet.direction = Vector2(0, 1)
-		"up":
-			bullet.direction = Vector2(0, -1)
-
-	# Set the bullet's initial position at the gun's position
-	bullet.global_position = gun.global_position + bullet.direction * gun.gun_length
-
-	# Add the bullet to the current scene
-	get_tree().current_scene.add_child(bullet)
-	
 func attack():
 	if is_attacking or is_hurt or is_dodging:
 		return
@@ -239,13 +288,10 @@ func _on_attack_box_body_entered(body):
 		body.take_damage(attack_damage)
 
 func take_damage(amount: int):
-	current_health -= amount
-	current_health = clamp(current_health, 0, max_health)
+	Globals.take_damage(amount)  # Update health globally
+	print("Current health:", Globals.player_current_health)
 	is_hurt = true
 	is_attacking = false  # Cancel attack if hurt
-
-	# Emit the health_changed signal to update the UI
-	emit_signal("health_changed", current_health)
 
 	# Play the hurt animation based on direction
 	match current_dir:
@@ -266,9 +312,28 @@ func take_damage(amount: int):
 	hurt_timer.connect("timeout", Callable(self, "_on_hurt_timer_timeout"))
 	hurt_timer.start()
 
-	if current_health <= 0:
-		velocity = Vector2.ZERO
+	if Globals.player_current_health <= 0:
+		anim.play("die")
+		anim.connect("animation_finished", Callable(self, "_on_death_animation_finished"))
 
+func _on_death_animation_finished(animation_name: String) -> void:
+	# Check if the completed animation is the "die" animation
+	if animation_name == "die":
+		anim.disconnect("animation_finished", Callable(self, "_on_death_animation_finished"))  # Disconnect signal
+		_transition_to_next_scene()
+
+func _transition_to_next_scene() -> void:
+	# Instantiate and play the transition animation
+	#var transition_instance = Scene_transition.instantiate()
+	#get_tree().current_scene.add_child(transition_instance)
+
+	#var animation_player = transition_instance.get_node("AnimationPlayer")
+	#animation_player.play("fade_to_black")
+	#await animation_player.animation_finished
+
+	# Change to the next scene
+	get_tree().change_scene_to_file("res://Scenes/gameover.tscn")
+	
 func _on_hurt_timer_timeout():
 	is_hurt = false
 	play_idle_animation()

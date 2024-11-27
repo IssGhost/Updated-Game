@@ -1,12 +1,77 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0n6nnxfmc8ab"]
+[gd_scene load_steps=20 format=3 uid="uid://b0n6nnxfmc8ab"]
 
 [ext_resource type="Script" path="res://health_ui.gd" id="1_kp2hk"]
+[ext_resource type="PackedScene" uid="uid://c52shjr7m8dbb" path="res://Scenes/ActivatableBox.tscn" id="2_75ci4"]
+[ext_resource type="PackedScene" path="res://Scenes/activatable_item.tscn" id="3_2td2l"]
+[ext_resource type="PackedScene" uid="uid://d2ieghykeis8y" path="res://Scenes/lantern.tscn" id="3_tadsq"]
+[ext_resource type="PackedScene" uid="uid://d1s8uyp8mfmv" path="res://Scenes/WeaponBox.tscn" id="4_43ea6"]
+[ext_resource type="Texture2D" uid="uid://dayo73chhcqdg" path="res://Weapons/Guns/AnimatedAR.png" id="5_fafjv"]
+[ext_resource type="Texture2D" uid="uid://xqwqqfacldw6" path="res://Assets/coin.png" id="7_gq8a3"]
+[ext_resource type="Script" path="res://scripts/coin_count.gd" id="8_enutw"]
+[ext_resource type="Texture2D" path="res://Assets/955-9550236_red-vignette-background-peach.png" id="9_f0hlx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_652qu"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2b7up"]
 bg_color = Color(0.596078, 0.101961, 0.0627451, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rojx"]
+atlas = ExtResource("5_fafjv")
+region = Rect2(0, 0, 125, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5vvx"]
+atlas = ExtResource("5_fafjv")
+region = Rect2(125, 0, 125, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyjdq"]
+atlas = ExtResource("5_fafjv")
+region = Rect2(250, 0, 125, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnqkf"]
+atlas = ExtResource("5_fafjv")
+region = Rect2(375, 0, 125, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lq5ds"]
+atlas = ExtResource("5_fafjv")
+region = Rect2(500, 0, 125, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7kemj"]
+atlas = ExtResource("5_fafjv")
+region = Rect2(625, 0, 125, 68)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yeupk"]
+atlas = ExtResource("5_fafjv")
+region = Rect2(750, 0, 125, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3rcrb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rojx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5vvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyjdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnqkf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lq5ds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7kemj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yeupk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="HealthUI" type="CanvasLayer"]
 script = ExtResource("1_kp2hk")
@@ -22,7 +87,8 @@ size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="BossHealthBar" type="ProgressBar" parent="."]
-anchors_preset = -1
+visible = false
+anchors_preset = 10
 anchor_right = 1.0
 offset_left = 50.0
 offset_top = -196.0
@@ -37,3 +103,87 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_2b7up")
 max_value = 1000.0
 value = 1000.0
 rounded = true
+
+[node name="Activatable" parent="." instance=ExtResource("2_75ci4")]
+offset_left = 17.0
+offset_top = -267.0
+offset_right = 177.0
+offset_bottom = -227.0
+scale = Vector2(3, 3)
+
+[node name="Activatable_item" parent="Activatable" instance=ExtResource("3_2td2l")]
+position = Vector2(80.6667, 44.3333)
+
+[node name="AnimatedSprite2D" parent="Activatable" instance=ExtResource("3_tadsq")]
+visible = false
+position = Vector2(80.3333, 39)
+scale = Vector2(0.5, 0.5)
+
+[node name="Weapon" parent="." instance=ExtResource("4_43ea6")]
+offset_left = -489.0
+offset_top = -273.0
+offset_right = -335.0
+offset_bottom = -196.0
+scale = Vector2(3, 3)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Weapon"]
+layout_mode = 0
+offset_left = 94.3333
+offset_top = 48.0
+offset_right = 157.333
+offset_bottom = 84.0
+text = "50 / 50"
+tab_size = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Weapon"]
+position = Vector2(80, 32)
+sprite_frames = SubResource("SpriteFrames_3rcrb")
+autoplay = "default"
+
+[node name="CoinCounter" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.046
+anchor_top = 0.125
+anchor_right = 0.046
+anchor_bottom = 0.125
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+
+[node name="Sprite2D" type="Sprite2D" parent="CoinCounter"]
+texture = ExtResource("7_gq8a3")
+hframes = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CoinCounter"]
+layout_mode = 0
+offset_left = -40.44
+offset_top = -13.44
+offset_right = -0.440002
+offset_bottom = 26.56
+
+[node name="Label" type="Label" parent="CoinCounter"]
+layout_mode = 0
+offset_left = -28.72
+offset_top = -14.0
+offset_right = 11.28
+offset_bottom = 9.0
+script = ExtResource("8_enutw")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+visible = false
+modulate = Color(1, 1, 1, 0.356863)
+position = Vector2(2212, 1238)
+scale = Vector2(2.3, 2.3)
+texture = ExtResource("9_f0hlx")
+
+[editable path="Activatable/Activatable_item"]

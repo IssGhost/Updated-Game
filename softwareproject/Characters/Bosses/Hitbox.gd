@@ -1,5 +1,5 @@
 extends Area2D
-class_name Hitbox
+class_name Hitbox1
 
 @export var target : CharacterBody2D
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://erblgpr62p4j"]
+[gd_scene load_steps=43 format=3 uid="uid://erblgpr62p4j"]
 
 [ext_resource type="Script" path="res://scripts/Slime_boss.gd" id="1_7ydd8"]
 [ext_resource type="Script" path="res://Characters/Bosses/SlimeBossFSM.gd" id="2_kkss8"]
@@ -7,6 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://cp8u6omghiq32" path="res://Characters/Bosses/slime_idle_spritesheet.png" id="5_w2sah"]
 [ext_resource type="Texture2D" uid="uid://0qqsbnga0p5k" path="res://Characters/Bosses/slime_run_spritesheeet.png" id="6_kd3b4"]
 [ext_resource type="Script" path="res://Characters/Bosses/Hitbox.gd" id="7_hxwed"]
+[ext_resource type="PackedScene" uid="uid://c0jp3kux13enq" path="res://Scenes/attack_box.tscn" id="8_lwnm7"]
+[ext_resource type="Script" path="res://scripts/attack_box.gd" id="9_v37k0"]
+
+[sub_resource type="Animation" id="Animation_k8s82"]
+resource_name = "chase"
 
 [sub_resource type="Animation" id="19"]
 resource_name = "dead"
@@ -219,14 +224,11 @@ tracks/3/keys = {
 "values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, -8), Vector2(0, -8), Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_k8s82"]
-resource_name = "chase"
+[sub_resource type="Animation" id="Animation_qub80"]
+resource_name = "projectile_attack"
 
 [sub_resource type="Animation" id="Animation_f0blj"]
 resource_name = "slide_attack"
-
-[sub_resource type="Animation" id="Animation_qub80"]
-resource_name = "projectile_attack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1ny0p"]
 _data = {
@@ -457,19 +459,23 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
-[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("target")]
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 177
 collision_mask = 255
 script = ExtResource("7_hxwed")
-target = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_6l6vc")
+disabled = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="HurtTimer" type="Timer" parent="."]
 
+[node name="AttackBox" parent="." instance=ExtResource("8_lwnm7")]
+script = ExtResource("9_v37k0")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="FSM" method="_on_animation_finished"]
 [connection signal="area_entered" from="Hitbox" to="Hitbox" method="_on_area_entered"]

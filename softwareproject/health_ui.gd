@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 # Player health configuration
-@export var max_health: int = 10  # e.g., 5 hearts (2 health points per heart)
+@export var max_health: int = 100  # e.g., 5 hearts (2 health points per heart)
 var current_health: int = max_health  # Start with full health
 
 # Boss health configuration
@@ -12,44 +12,48 @@ var boss_current_health: int = 1000
 @onready var health_container = $HealthContainer
 @onready var boss_health_bar: ProgressBar = $BossHealthBar  # Reference to the boss health bar
 @onready var player = preload("res://Scenes/player.tscn")  # Adjust as needed
-
+@onready var ammo_label: RichTextLabel = $Weapon/RichTextLabel # Adjust path as needed
+@onready var damageboost: Sprite2D = $Control/Sprite2D
 func _ready():
-	# Player health setup
-	if player:
-		player.connect("health_changed", Callable(self, "update_hearts"))
-	else:
-		print("Error: Player node not found. Check the path or ensure it is added to the scene before HealthUI.")
+	Globals.connect("health_changed", Callable(self, "update_hearts"))
+	Globals.connect("max_health_changed", Callable(self, "update_hearts"))  # Update when max health changes
+	update_hearts(Globals.player_current_health)  # Initialize with the current global health
+	
+	Globals.connect("ammo_changed", Callable(self, "update_ammo_label"))
+	update_ammo_label(Globals.current_ammo)  # Initialize the ammo label
 
 	# Hide boss health bar initially
-	boss_health_bar.visible = true
-
-	# Initial setup of hearts
-	update_hearts()
-
+	boss_health_bar.visible = false
+	
+func update_ammo_label(current_ammo: int) -> void:
+	ammo_label.text = str(current_ammo) + "/" + str(Globals.max_ammo)
+	
 # Function to handle player health updates
-func update_hearts(new_health: int = current_health):
+func update_hearts(new_health: int):
+	# Update global variables to reflect the current state
+	Globals.player_current_health = new_health
 	current_health = new_health
 
-	# Clear any existing hearts
+	# Clear any existing hearts in the health container
 	for child in health_container.get_children():
 		child.queue_free()
 
-	# Total number of hearts to display (each heart represents 2 health points)
-	var heart_count = int(ceil(float(max_health) / 2))
+	# Dynamically calculate the total number of hearts based on `Globals.player_max_health`
+	var heart_count = int(ceil(float(Globals.player_max_health) / 20))
 
-	# Create hearts with correct visuals for each health point
+	# Create the correct number of heart visuals
 	for i in range(heart_count):
 		var heart = heart_scene.instantiate()
-		heart.position = Vector2((i * 15) + 10, 10)
+		heart.position = Vector2((i * 15) + 10, 10)  # Adjust position spacing as needed
 		health_container.add_child(heart)
 
-		# Calculate the health state for this heart
-		var health_for_this_heart = current_health - (i * 2)
+		# Calculate the health for the current heart (each heart represents 20 HP)
+		var health_for_this_heart = new_health - (i * 20)
 
-		# Set the heart's animation based on the exact health value
-		if health_for_this_heart >= 2:
+		# Update the heart's animation based on its state
+		if health_for_this_heart >= 20:
 			heart.play("Full")  # Full heart
-		elif health_for_this_heart == 1:
+		elif health_for_this_heart > 0:
 			heart.play("Half")  # Half heart
 		else:
 			heart.play("Empty")  # Empty heart
@@ -67,6 +71,7 @@ func _update_health_bar(new_health: int) -> void:
 	boss_health_bar.value = new_health
 	print("BossHealthBar max_value:", boss_health_bar.max_value)
 	print("BossHealthBar value:", boss_health_bar.value)
+
 func _hide_health_bar() -> void:
 	boss_health_bar.visible = false
 
@@ -74,3 +79,7 @@ func _hide_health_bar() -> void:
 func _on_slimeboss_health_changed(new_health: Variant) -> void:
 	print("Boss health updated to:", new_health)
 	boss_health_bar.value = new_health
+
+
+func _on_boss_defeated() -> void:
+	pass # Replace with function body.

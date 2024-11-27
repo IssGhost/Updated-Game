@@ -7,9 +7,9 @@ signal defeated
 
 # Configurable variables
 @export var max_hp: int = 1000
-@export var jump_force: float = 100
-@export var acceleration: float = 40
-@export var max_speed: float = 100
+@export var jump_force: float = 20
+@export var acceleration: float = 30
+@export var max_speed: float = 40
 @export var friction: float = 0.15
 @export var hurt_duration: float = 0.5
 @export var hit_effect_scene: PackedScene = preload("res://Characters/Bosses/HitEffect.tscn")
@@ -92,7 +92,7 @@ func take_damage(amount: int) -> void:
 	else:
 		emit_signal("defeated")
 		fsm.set_state(fsm.states.dead)
-		sprite.play("death")  # Play death animation
+		sprite.play("dead_explosion")  # Play death animation
 		
 		# Add a timer to delay removal
 		var death_timer = Timer.new()

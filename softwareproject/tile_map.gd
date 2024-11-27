@@ -7,6 +7,10 @@ var top_door_scene = preload("res://Scenes/top_door.tscn")
 var right_door_scene = preload("res://Scenes/right_door.tscn")
 var bed_boss_scene = preload("res://Scenes/Bed_boss_transition.tscn")
 
+@export var chest_scene: PackedScene = preload("res://Scenes/chest.tscn")
+@export var box_scene: PackedScene = preload("res://Scenes/box.tscn")
+@export var table_scene: PackedScene = preload("res://Scenes/table.tscn")
+
 # Constants
 const MAP_WIDTH = 125
 const MAP_HEIGHT = 100
@@ -269,6 +273,59 @@ class Leaf:
 
 var initial_room: Room = null
 
+var total_chests_spawned = 0  # Global counter for total chests spawned
+const MAX_CHESTS = 3  # Maximum number of chests allowed globally
+
+func spawn_objects_in_room(room: Room):
+	if not room:
+		print("Error: Room is null. Cannot spawn objects.")
+		return
+
+	# Ensure at least one box and one table are spawned
+	var objects_to_spawn = [
+		{"scene": box_scene, "name": "Box"},
+		{"scene": table_scene, "name": "Table"}
+	]
+
+	# Spawn each guaranteed object
+	for obj in objects_to_spawn:
+		var obj_instance = obj["scene"].instantiate()
+		obj_instance.position = get_randomized_room_position(room)
+		add_child(obj_instance)
+		print("Spawned %s in room %s at position %s" % [obj["name"], room.id, obj_instance.position])
+
+	# Conditionally spawn a chest if the global limit is not reached
+	if total_chests_spawned < MAX_CHESTS:
+		var rng = RandomNumberGenerator.new()
+		rng.randomize()
+
+		# 50% chance to spawn a chest in this room
+		if rng.randf() < 0.5:
+			var chest_instance = chest_scene.instantiate()
+			chest_instance.position = get_randomized_room_position(room)
+			add_child(chest_instance)
+			total_chests_spawned += 1
+			print("Spawned Chest in room %s at position %s (Total Chests: %s)" % [room.id, chest_instance.position, total_chests_spawned])
+		else:
+			print("No chest spawned in room %s" % room.id)
+
+func spawn_object_in_room(room: Room, object_scene: PackedScene, object_name: String):
+	if not object_scene:
+		print("Error: Scene for", object_name, "is null.")
+		return
+
+	# Get random position within room bounds
+	var spawn_x = randf_range(room.rect.position.x + 1, room.rect.position.x + room.rect.size.x - 1)
+	var spawn_y = randf_range(room.rect.position.y + 1, room.rect.position.y + room.rect.size.y - 1)
+
+	# Instantiate the object and set its position
+	var object_instance = object_scene.instantiate()
+	object_instance.position = Vector2(spawn_x, spawn_y) * 32  # Assuming tile size is 32x32
+	add_child(object_instance)
+
+	print("Spawned", object_name, "at position:", object_instance.position, "in room ID:", room.id)
+
+
 func spawn_character_in_room():
 	if root_leaf.rooms.size() == 0:
 		print("No rooms available to spawn the player.")
@@ -488,7 +545,9 @@ func _ready():
 	generate_level()
 	place_tiles()  # Place room tiles
 	place_corridor_tiles()  # Place corridor tiles
-
+	
+	for room in root_leaf.rooms:
+		spawn_objects_in_room(room)
 	# Ensure Area2DContainer exists or create it
 	if not area2d_container:
 		area2d_container = Node2D.new()

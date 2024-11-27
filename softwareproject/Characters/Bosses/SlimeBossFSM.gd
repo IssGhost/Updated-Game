@@ -3,7 +3,7 @@ class_name SlimeBossFSM
 
 # Configurable variables
 @export var jump_cooldown: float = 2.0
-@export var slide_attack_speed: float = 200
+@export var slide_attack_speed: float = 20
 @export var projectile_scene: PackedScene = preload("res://Weapons/Projectile.tscn")
 
 # References

@@ -7,4 +7,4 @@ func _ready() -> void:
 
 
 func _process(_delta):
-	text = "Coins: %d" % Globals.coin_count
+	text = "%d" % Globals.coin_count

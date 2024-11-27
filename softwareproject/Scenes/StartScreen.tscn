@@ -39,15 +39,53 @@ grow_vertical = 0
 scale = Vector2(1, 5)
 theme_override_constants/separation = 12
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="SettingsButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="SoundButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_5lk1y")
 volume_db = -20.0
+
+[node name="StartButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.716
+anchor_right = 0.534
+anchor_bottom = 0.727
+offset_left = -109.0
+offset_top = -8.0
+offset_right = 109.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.818
+anchor_right = 0.534
+anchor_bottom = 0.818
+offset_left = -109.0
+offset_top = -8.0
+offset_right = 109.0
+offset_bottom = 43.88
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="QuitButton" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.909
+anchor_right = 0.534
+anchor_bottom = 0.909
+offset_left = -109.0
+offset_top = -8.0
+offset_right = 109.0
+offset_bottom = 43.88
+grow_horizontal = 2
+grow_vertical = 0
+
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

@@ -57,6 +57,7 @@ animations = [{
 size = Vector2(16.75, 21)
 
 [node name="Box" type="Node2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_3l68l")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

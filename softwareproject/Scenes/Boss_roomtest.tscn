@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dcn7m7f3npdg0"]
+[gd_scene load_steps=34 format=3 uid="uid://dcn7m7f3npdg0"]
 
 [ext_resource type="Script" path="res://Scenes/boss_roomtest_transition.gd" id="1_6306b"]
 [ext_resource type="Texture2D" uid="uid://x54i0qq8lois" path="res://Assets/Imported Free Assets/0x72_DungeonTilesetII_v1.7/0x72_DungeonTilesetII_v1.7.png" id="1_kqx0l"]
@@ -17,6 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://ogmkwqhqmv4m" path="res://Scenes/coin.tscn" id="15_xcj6t"]
 [ext_resource type="PackedScene" uid="uid://b0n6nnxfmc8ab" path="res://Scenes/HealthUI.tscn" id="16_stn0x"]
 [ext_resource type="PackedScene" uid="uid://bq3wtbkfp4s81" path="res://Scenes/boss_room_exit.tscn" id="17_a3ch4"]
+[ext_resource type="AudioStream" path="res://Sounds/evil-boss-appears-short-instrumental-178343.mp3" id="18_atnjj"]
+[ext_resource type="Script" path="res://scripts/boss_music.gd" id="19_2m4g1"]
+[ext_resource type="PackedScene" path="res://Scenes/heart_item.tscn" id="20_k2raa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5ky2"]
 atlas = ExtResource("1_kqx0l")
@@ -306,6 +309,7 @@ visible = false
 zoom = Vector2(10, 10)
 
 [node name="Label" parent="player" index="13"]
+visible = false
 anchors_preset = 0
 anchor_left = 0.0
 anchor_right = 0.0
@@ -335,7 +339,8 @@ shape = SubResource("RectangleShape2D_5ui0e")
 [node name="RightDoor" parent="." instance=ExtResource("11_wuxhe")]
 
 [node name="Table" parent="." instance=ExtResource("11_7j3a2")]
-position = Vector2(628, 71)
+position = Vector2(604, 84)
+scale = Vector2(1, 1)
 
 [node name="Gun" parent="." instance=ExtResource("12_r81su")]
 position = Vector2(553, 55)
@@ -343,13 +348,11 @@ scale = Vector2(0.3, 0.3)
 
 [node name="Chest" parent="." instance=ExtResource("13_8rhlt")]
 position = Vector2(714, 27)
-scale = Vector2(1.3, 1.3)
+scale = Vector2(1, 1)
 
 [node name="Box" parent="." instance=ExtResource("14_p5tr1")]
 position = Vector2(535, 21)
-
-[node name="Coin" parent="Box" instance=ExtResource("15_xcj6t")]
-position = Vector2(141, 6)
+scale = Vector2(1, 1)
 
 [node name="Slimeboss" parent="." instance=ExtResource("15_j04jn")]
 position = Vector2(634, 351)
@@ -361,6 +364,7 @@ navigation_polygon = SubResource("NavigationPolygon_yea4v")
 [node name="HealthUI" parent="." instance=ExtResource("16_stn0x")]
 
 [node name="BossHealthBar" parent="HealthUI" index="1"]
+anchors_preset = -1
 anchor_left = 0.148
 anchor_top = 0.876
 anchor_right = 0.886
@@ -372,8 +376,41 @@ offset_bottom = 100.0
 grow_vertical = 0
 show_percentage = false
 
-[node name="Node2D" parent="." instance=ExtResource("17_a3ch4")]
+[node name="Red" parent="HealthUI/Activatable/Activatable_item" index="3"]
+position = Vector2(618.333, -59)
+scale = Vector2(1.5, 1.5)
+
+[node name="NextFloor" parent="." instance=ExtResource("17_a3ch4")]
 position = Vector2(632, 312)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_atnjj")
+volume_db = -31.856
+autoplay = true
+script = ExtResource("19_2m4g1")
+
+[node name="Heart_item" parent="." instance=ExtResource("20_k2raa")]
+position = Vector2(696, 57)
+
+[node name="Coin" parent="." instance=ExtResource("15_xcj6t")]
+position = Vector2(673, 25)
+scale = Vector2(0.5, 0.5)
+
+[node name="Coin2" parent="." instance=ExtResource("15_xcj6t")]
+position = Vector2(673, 25)
+scale = Vector2(0.5, 0.5)
+
+[node name="Coin3" parent="." instance=ExtResource("15_xcj6t")]
+position = Vector2(673, 25)
+scale = Vector2(0.5, 0.5)
+
+[node name="Coin4" parent="." instance=ExtResource("15_xcj6t")]
+position = Vector2(673, 25)
+scale = Vector2(0.5, 0.5)
+
+[node name="Coin5" parent="." instance=ExtResource("15_xcj6t")]
+position = Vector2(673, 25)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="body_entered" from="Spike/Area2D12" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D11" to="Spike" method="_on_area_2d_body_entered"]
@@ -387,6 +424,9 @@ position = Vector2(632, 312)
 [connection signal="body_entered" from="Spike/Area2D3" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D2" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D" to="Spike" method="_on_area_2d_body_entered"]
+[connection signal="defeated" from="Slimeboss" to="." method="_on_boss_defeated"]
+[connection signal="defeated" from="Slimeboss" to="NextFloor" method="_on_slimeboss_defeated"]
+[connection signal="defeated" from="Slimeboss" to="AudioStreamPlayer" method="_on_slimeboss_defeated"]
 [connection signal="health_changed" from="Slimeboss" to="HealthUI" method="_on_slimeboss_health_changed"]
 
 [editable path="player"]
@@ -395,4 +435,5 @@ position = Vector2(632, 312)
 [editable path="player/Node2D/ArGun"]
 [editable path="Slimeboss"]
 [editable path="HealthUI"]
-[editable path="Node2D"]
+[editable path="HealthUI/Activatable/Activatable_item"]
+[editable path="NextFloor"]

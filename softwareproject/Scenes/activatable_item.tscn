@@ -1,0 +1,89 @@
+[gd_scene load_steps=7 format=3 uid="uid://nfqy430w7541"]
+
+[ext_resource type="Script" path="res://scripts/activatable_item.gd" id="1_f6xp3"]
+[ext_resource type="Texture2D" path="res://Assets/magazine.png" id="2_opmh8"]
+[ext_resource type="Texture2D" path="res://Assets/955-9550236_red-vignette-background-peach.png" id="3_3k0tt"]
+
+[sub_resource type="Animation" id="Animation_k66ty"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Red:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_hen2m"]
+resource_name = "Used"
+length = 15.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Red:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g52ld"]
+_data = {
+"RESET": SubResource("Animation_k66ty"),
+"Used": SubResource("Animation_hen2m")
+}
+
+[node name="Activatable_item" type="Node2D"]
+script = ExtResource("1_f6xp3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_opmh8")
+hframes = 15
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g52ld")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 15.0
+
+[node name="Red" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.627451)
+position = Vector2(1195, 365)
+scale = Vector2(5, 5)
+texture = ExtResource("3_3k0tt")

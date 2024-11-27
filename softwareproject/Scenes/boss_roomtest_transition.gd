@@ -1,8 +1,9 @@
 extends Node2D
 
 @onready var overlay: ColorRect = $Overlay
-@onready var slime_boss: Node = $SlimeBoss  # Reference to the SlimeBoss in the scene
-@onready var ui_manager: Node = $HealthUI  # Adjust the path if needed
+@onready var slime_boss: Node = $SlimeBoss  
+@onready var ui_manager: Node = $HealthUI
+@onready var slime_boss_health_bar: ProgressBar = $HealthUI/BossHealthBar
 @export var Scene_transition: PackedScene = preload("res://Scenes/Scene_transition.tscn")
 
 func _ready():
@@ -21,6 +22,8 @@ func _ready():
 	# Handle boss room-specific logic
 	if slime_boss and ui_manager:
 		ui_manager.setup_boss_health(slime_boss)
+	
+	slime_boss_health_bar.visible = true
 
 func setup_boss_health() -> void:
 	# Notify the UI manager about the boss
@@ -32,7 +35,5 @@ func setup_boss_health() -> void:
 
 func _on_boss_defeated() -> void:
 	# Hide the boss health bar and perform additional cleanup if needed
-	if ui_manager:
-		ui_manager.call("hide_boss_health_bar")
-
+	slime_boss_health_bar.visible = false
 	print("Boss defeated! Handle any post-boss logic here.")
