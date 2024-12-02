@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_13"
+type="Resource"
+uid="uid://gpxpegs6df4d"
+path="res://.godot/imported/tutorial_dialogue.dialogue-35db5c106004706fbd9e432c89a3b176.tres"
+
+[deps]
+
+source_file="res://tutorial_dialogue.dialogue"
+dest_files=["res://.godot/imported/tutorial_dialogue.dialogue-35db5c106004706fbd9e432c89a3b176.tres"]
+
+[params]
+
+defaults=true

@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var bed: StaticBody2D = $Bed
 @export var dialogue_resource: DialogueResource
-@export var dialogue_start: String = "start"
+@export var dialogue_start: String = "this_is_a_node_title"
 @export var Scene_transition: PackedScene = preload("res://Scenes/Scene_transition.tscn")
 const Balloon = preload("res://Dialogue/balloon.tscn")
 

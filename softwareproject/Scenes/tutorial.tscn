@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://d4j5ooaupjhnp"]
+[gd_scene load_steps=78 format=3 uid="uid://d4j5ooaupjhnp"]
 
 [ext_resource type="TileSet" uid="uid://kjm8oeujqkg4" path="res://Dungeon_gen.tres" id="1_uvrul"]
 [ext_resource type="PackedScene" uid="uid://w5rc138o7e2c" path="res://Scenes/top_door.tscn" id="2_nxffj"]
@@ -52,6 +52,9 @@
 [ext_resource type="PackedScene" uid="uid://b0n6nnxfmc8ab" path="res://Scenes/HealthUI.tscn" id="50_gmt05"]
 [ext_resource type="Script" path="res://scripts/bed_tutorial.gd" id="51_xowmg"]
 [ext_resource type="Texture2D" uid="uid://b3phtfa0asc4s" path="res://Assets/boss_bed.png" id="52_ivlpw"]
+[ext_resource type="Script" path="res://tutorial_actionable.gd" id="52_r4ere"]
+[ext_resource type="PackedScene" uid="uid://bcr7kif0wx014" path="res://Scenes/actionable.tscn" id="53_m7lcl"]
+[ext_resource type="Resource" uid="uid://gpxpegs6df4d" path="res://tutorial_dialogue.dialogue" id="55_4lmju"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j741q"]
 animations = [{
@@ -323,11 +326,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5cwj"]
-size = Vector2(64, 88.5)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l6uuj"]
 size = Vector2(36, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5cwj"]
+size = Vector2(64, 88.5)
 
 [node name="Node2D" type="Node2D"]
 
@@ -431,6 +434,7 @@ text = "Shoot
 position = Vector2(1116, 191)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_a2qqe")
+autoplay = "default"
 
 [node name="Label" type="Label" parent="Activatable"]
 offset_left = 1084.0
@@ -461,6 +465,7 @@ position = Vector2(1, 0)
 position = Vector2(864, 195)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kni5i")
+autoplay = "default"
 
 [node name="Table" parent="Usable" instance=ExtResource("35_loh0l")]
 position = Vector2(861, 130)
@@ -509,6 +514,7 @@ position = Vector2(987, 167)
 position = Vector2(719, 87)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_1kthj")
+autoplay = "default"
 
 [node name="Label" type="Label" parent="Reload"]
 offset_left = 691.0
@@ -525,6 +531,7 @@ text = "Reload"
 position = Vector2(1502, 197)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_hv8gv")
+autoplay = "default"
 
 [node name="Label" type="Label" parent="Dialogue"]
 offset_left = 1435.0
@@ -576,10 +583,6 @@ script = ExtResource("51_xowmg")
 collision_layer = 257
 collision_mask = 257
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/Area2D"]
-position = Vector2(1780, 141.25)
-shape = SubResource("RectangleShape2D_v5cwj")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="Bed"]
 
 [node name="Sprite2D" type="Sprite2D" parent="Bed/StaticBody2D"]
@@ -590,6 +593,17 @@ hframes = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/StaticBody2D"]
 position = Vector2(1781, 140)
 shape = SubResource("RectangleShape2D_l6uuj")
+
+[node name="Actionable" parent="Bed" instance=ExtResource("53_m7lcl")]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("52_r4ere")
+dialogue_resource = ExtResource("55_4lmju")
+dialogue_start = "this_is_a_node_title"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/Actionable"]
+position = Vector2(1780, 141.25)
+shape = SubResource("RectangleShape2D_v5cwj")
 
 [connection signal="body_entered" from="Bed/Area2D" to="Bed" method="_on_body_entered"]
 [connection signal="body_exited" from="Bed/Area2D" to="Bed" method="_on_body_exited"]
