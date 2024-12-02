@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcr7kif0wx014"]
-
-[ext_resource type="Script" path="res://actionable.gd" id="1_vcnp8"]
-
-[node name="Actionable" type="Area2D"]
-script = ExtResource("1_vcnp8")
