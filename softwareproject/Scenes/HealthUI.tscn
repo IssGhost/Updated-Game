@@ -107,11 +107,11 @@ value = 1000.0
 rounded = true
 
 [node name="Activatable" parent="." instance=ExtResource("2_75ci4")]
-offset_left = 17.0
-offset_top = -267.0
-offset_right = 177.0
-offset_bottom = -227.0
-scale = Vector2(3, 3)
+offset_left = 15.0
+offset_top = -409.0
+offset_right = 175.0
+offset_bottom = -369.0
+scale = Vector2(5, 5)
 
 [node name="Activatable_item" parent="Activatable" instance=ExtResource("3_2td2l")]
 position = Vector2(80.6667, 44.3333)
@@ -122,17 +122,17 @@ position = Vector2(80.3333, 39)
 scale = Vector2(0.5, 0.5)
 
 [node name="Weapon" parent="." instance=ExtResource("4_43ea6")]
-offset_left = -489.0
-offset_top = -273.0
-offset_right = -335.0
-offset_bottom = -196.0
-scale = Vector2(3, 3)
+offset_left = -795.0
+offset_top = -396.0
+offset_right = -641.0
+offset_bottom = -319.0
+scale = Vector2(5, 5)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Weapon"]
 layout_mode = 0
-offset_left = 94.3333
+offset_left = 94.4
 offset_top = 48.0
-offset_right = 157.333
+offset_right = 157.4
 offset_bottom = 84.0
 text = "50 / 50"
 tab_size = 3

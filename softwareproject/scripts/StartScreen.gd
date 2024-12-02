@@ -23,6 +23,10 @@ func _ready():
 	else:
 		print("Error: SoundButton not found")
 
+	if $Tutorial:
+		$Tutorial.pressed.connect(_on_tutorial_button_pressed)
+	else:
+		print("Error: StartButton not found")
 
 func _on_start_button_pressed():
 	reset_game()
@@ -46,3 +50,8 @@ func _on_quit_button_pressed():
 	# Open the options menu or perform another action
 	print("Sound button pressed")
 	get_tree().quit()
+	
+func _on_tutorial_button_pressed():
+	reset_game()
+	background_music.stop()
+	get_tree().change_scene_to_file("res://Scenes/tutorial.tscn")

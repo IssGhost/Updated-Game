@@ -51,5 +51,5 @@ func spawn_item() -> void:
 	var item_scene = load(ITEM_SCENE_PATH) as PackedScene 
 	if item_scene:
 		var item_instance = item_scene.instantiate()  
-		item_instance.global_position = spawn_position.global_position  
+		item_instance.global_position = spawn_position.global_position
 		get_parent().add_child(item_instance)
