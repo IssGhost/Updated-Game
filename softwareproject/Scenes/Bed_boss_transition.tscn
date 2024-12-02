@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx455cih54m7d"]
+
+[ext_resource type="Script" path="res://Scenes/bed_boss_transition.gd" id="1_02ert"]
+[ext_resource type="Texture2D" uid="uid://b3phtfa0asc4s" path="res://Assets/boss_bed.png" id="1_15lyx"]
+[ext_resource type="PackedScene" uid="uid://bcr7kif0wx014" path="res://Scenes/actionable.tscn" id="2_2kpp7"]
+[ext_resource type="Resource" uid="uid://dsx4ue3sapes8" path="res://Dialogue/Boss_transition.dialogue" id="3_nc7dh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px3hi"]
+atlas = ExtResource("1_15lyx")
+region = Rect2(0, 0, 74, 142)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmkv5"]
+atlas = ExtResource("1_15lyx")
+region = Rect2(74, 0, 74, 142)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_df2q4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px3hi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmkv5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xifmp"]
+size = Vector2(36, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p8uub"]
+size = Vector2(65, 93)
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(845, 485)
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_02ert")
+
+[node name="Bed" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Bed"]
+sprite_frames = SubResource("SpriteFrames_df2q4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_xifmp")
+
+[node name="Actionable" parent="Bed" instance=ExtResource("2_2kpp7")]
+collision_layer = 256
+collision_mask = 0
+dialogue_resource = ExtResource("3_nc7dh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bed/Actionable"]
+position = Vector2(-0.5, 4.5)
+shape = SubResource("RectangleShape2D_p8uub")

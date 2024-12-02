@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkspkax74rdce"]
+
+[ext_resource type="Script" path="res://scripts/main_game.gd" id="1_63tns"]
+[ext_resource type="TileSet" uid="uid://kjm8oeujqkg4" path="res://Dungeon_gen.tres" id="1_xcqr6"]
+[ext_resource type="Script" path="res://tile_map.gd" id="2_qoqut"]
+[ext_resource type="Texture2D" uid="uid://cytihwwbup4o7" path="res://Assets/light.png" id="4_q75w8"]
+[ext_resource type="AudioStream" uid="uid://i26db5h6vq8d" path="res://Sounds/background_music.mp3" id="7_ejiyf"]
+[ext_resource type="PackedScene" uid="uid://bunoftyokcv2c" path="res://Scenes/player.tscn" id="7_puafu"]
+[ext_resource type="PackedScene" uid="uid://b0n6nnxfmc8ab" path="res://Scenes/HealthUI.tscn" id="9_20blq"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_63tns")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(6, 0)
+tile_set = ExtResource("1_xcqr6")
+format = 2
+layer_0/name = "Wall"
+layer_1/name = "Floor"
+layer_2/name = "Path"
+script = ExtResource("2_qoqut")
+
+[node name="Camera2D" type="Camera2D" parent="TileMap"]
+position = Vector2(2267, 1344)
+enabled = false
+
+[node name="BossLabel" type="Label" parent="TileMap"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ShopLabel" type="Label" parent="TileMap"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ChestLabel" type="Label" parent="TileMap"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="player" parent="TileMap" instance=ExtResource("7_puafu")]
+position = Vector2(1360, 962)
+scale = Vector2(3, 3)
+speed = 250
+
+[node name="PointLight2D" type="PointLight2D" parent="TileMap/player/Sprite2D" index="0"]
+position = Vector2(-1.00003, 3.05176e-05)
+texture = ExtResource("4_q75w8")
+texture_scale = 0.4
+
+[node name="CollisionShape2D" parent="TileMap/player" index="2"]
+position = Vector2(0.333345, 9.33333)
+disabled = false
+
+[node name="Camera2D" parent="TileMap/player" index="12"]
+zoom = Vector2(5, 5)
+
+[node name="Camera2D2" type="Camera2D" parent="TileMap/player"]
+zoom = Vector2(4, 4)
+
+[node name="Area2DContainer" type="Node" parent="TileMap"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -3
+offset_left = -2110.0
+offset_top = -652.0
+offset_right = 6771.0
+offset_bottom = 5074.0
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="Control" parent="." instance=ExtResource("9_20blq")]
+
+[node name="BossHealthBar" parent="Control" index="1"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 27.0
+grow_vertical = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ejiyf")
+volume_db = -33.73
+autoplay = true
+
+[editable path="TileMap/player"]
+[editable path="TileMap/player/AttackBox"]
+[editable path="TileMap/player/Hurtbox"]
+[editable path="TileMap/player/Node2D/ArGun"]
+[editable path="Control"]
+[editable path="Control/Activatable/Activatable_item"]

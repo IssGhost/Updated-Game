@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c52shjr7m8dbb"]
+
+[ext_resource type="Texture2D" uid="uid://cluha3awrt0tj" path="res://Assets/Boxes.png" id="1_08qqq"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 80.0
+texture = ExtResource("1_08qqq")

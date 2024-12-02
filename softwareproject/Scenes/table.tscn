@@ -1,0 +1,133 @@
+[gd_scene load_steps=11 format=3 uid="uid://drmamc2s0geyr"]
+
+[ext_resource type="Script" path="res://Scenes/table.gd" id="1_nmbjp"]
+[ext_resource type="Texture2D" uid="uid://cd3oc08jv3mbs" path="res://Assets/tabel_spritesheet.png" id="3_cj3er"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7qst"]
+size = Vector2(65.5, 47.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjwo5"]
+size = Vector2(50, 31)
+
+[sub_resource type="Animation" id="Animation_6eqo8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_4eeu0"]
+resource_name = "default"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bq2j7"]
+resource_name = "flipbot"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_ih4ne"]
+resource_name = "fliptop"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_8em3u"]
+resource_name = "select"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StaticBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8v487"]
+_data = {
+"RESET": SubResource("Animation_6eqo8"),
+"default": SubResource("Animation_4eeu0"),
+"flipbot": SubResource("Animation_bq2j7"),
+"fliptop": SubResource("Animation_ih4ne"),
+"select": SubResource("Animation_8em3u")
+}
+
+[node name="Table" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_nmbjp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+collision_layer = 32769
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+position = Vector2(-0.25, 0.75)
+shape = SubResource("RectangleShape2D_k7qst")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_mjwo5")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("3_cj3er")
+hframes = 3
+vframes = 3
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8v487")
+}
+autoplay = "default"
+
+[connection signal="body_entered" from="StaticBody2D/Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="StaticBody2D/Area2D" to="." method="_on_Area2D_body_exited"]

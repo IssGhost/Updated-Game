@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://6krtokb3532b"
+path="res://.godot/imported/Quit.gif-08ad140eb3f78df32cfb4fb76a0c4560.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Quit/Quit.gif"
+dest_files=["res://.godot/imported/Quit.gif-08ad140eb3f78df32cfb4fb76a0c4560.tres"]
+
+[params]
+
+frames_per_second=30

@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://cneguc05ya4x4"
+path="res://.godot/imported/Volume.gif-457276ae4fda52ee8fae44056b06bc95.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Volume/Volume.gif"
+dest_files=["res://.godot/imported/Volume.gif-457276ae4fda52ee8fae44056b06bc95.tres"]
+
+[params]
+
+frames_per_second=30

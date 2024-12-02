@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://dmr8ihwxkq1aw"
+path="res://.godot/imported/LeftKey.gif-a4972e1e5aa8965b4073a57c6a253cdc.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/LeftKey/LeftKey.gif"
+dest_files=["res://.godot/imported/LeftKey.gif-a4972e1e5aa8965b4073a57c6a253cdc.tres"]
+
+[params]
+
+frames_per_second=30

@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://c0ot6vg1s03gm"
+path="res://.godot/imported/Levels.gif-0a0e19236b8908f060aaa073786e77c1.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Levels/Levels.gif"
+dest_files=["res://.godot/imported/Levels.gif-0a0e19236b8908f060aaa073786e77c1.tres"]
+
+[params]
+
+frames_per_second=30

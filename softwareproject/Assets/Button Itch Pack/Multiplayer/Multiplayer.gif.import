@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://cql1cwb32jlld"
+path="res://.godot/imported/Multiplayer.gif-e25e726a9313f62ab64bfb16b9a4e039.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Multiplayer/Multiplayer.gif"
+dest_files=["res://.godot/imported/Multiplayer.gif-e25e726a9313f62ab64bfb16b9a4e039.tres"]
+
+[params]
+
+frames_per_second=30

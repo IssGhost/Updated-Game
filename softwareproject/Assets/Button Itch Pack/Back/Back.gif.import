@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://ctdrem1piwe63"
+path="res://.godot/imported/Back.gif-805674a4ac29d2223e29a144ba70da36.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Back/Back.gif"
+dest_files=["res://.godot/imported/Back.gif-805674a4ac29d2223e29a144ba70da36.tres"]
+
+[params]
+
+frames_per_second=30

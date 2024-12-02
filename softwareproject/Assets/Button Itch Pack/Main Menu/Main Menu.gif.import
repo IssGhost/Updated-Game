@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://dn0dsrxbck30x"
+path="res://.godot/imported/Main Menu.gif-c2ff13dfd473ffa0f4413ad7ca8a8fad.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Main Menu/Main Menu.gif"
+dest_files=["res://.godot/imported/Main Menu.gif-c2ff13dfd473ffa0f4413ad7ca8a8fad.tres"]
+
+[params]
+
+frames_per_second=30

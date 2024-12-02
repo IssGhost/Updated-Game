@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://b5epavitwtv6b"
+path="res://.godot/imported/Select.gif-d170af30007f53df8304d92943e445ff.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Select/Select.gif"
+dest_files=["res://.godot/imported/Select.gif-d170af30007f53df8304d92943e445ff.tres"]
+
+[params]
+
+frames_per_second=30

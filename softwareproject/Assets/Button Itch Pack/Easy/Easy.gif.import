@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://6ssa107813le"
+path="res://.godot/imported/Easy.gif-2cec8fc5cf0ee3c70b36613bb6a1efe3.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Easy/Easy.gif"
+dest_files=["res://.godot/imported/Easy.gif-2cec8fc5cf0ee3c70b36613bb6a1efe3.tres"]
+
+[params]
+
+frames_per_second=30

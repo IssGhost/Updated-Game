@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://cv5qwe5w4dv50"
+path="res://.godot/imported/Restart.gif-04014cbeabe7211e410b8e24e31cf6cf.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Restart/Restart.gif"
+dest_files=["res://.godot/imported/Restart.gif-04014cbeabe7211e410b8e24e31cf6cf.tres"]
+
+[params]
+
+frames_per_second=30

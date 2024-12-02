@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://dbuqie5axh51w"
+path="res://.godot/imported/Up.gif-09a9b57c0205bce4b53a6107a69e0d94.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Up/Up.gif"
+dest_files=["res://.godot/imported/Up.gif-09a9b57c0205bce4b53a6107a69e0d94.tres"]
+
+[params]
+
+frames_per_second=30

@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://c7tf45d5wcwsc"
+path="res://.godot/imported/Resume.gif-675edbdb9a55c8860f68b7c6e6118048.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Resume/Resume.gif"
+dest_files=["res://.godot/imported/Resume.gif-675edbdb9a55c8860f68b7c6e6118048.tres"]
+
+[params]
+
+frames_per_second=30

@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://dt1w3t0x5b2xh"
+path="res://.godot/imported/Start.gif-7adf9b8880589607baab3e660df8b2a4.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Start/Start.gif"
+dest_files=["res://.godot/imported/Start.gif-7adf9b8880589607baab3e660df8b2a4.tres"]
+
+[params]
+
+frames_per_second=30

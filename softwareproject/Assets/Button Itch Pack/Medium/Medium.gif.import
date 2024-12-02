@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://crihrv40omfq7"
+path="res://.godot/imported/Medium.gif-ae80d29e01fe626811a9bcc097466aaa.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Medium/Medium.gif"
+dest_files=["res://.godot/imported/Medium.gif-ae80d29e01fe626811a9bcc097466aaa.tres"]
+
+[params]
+
+frames_per_second=30

@@ -1,0 +1,84 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://bhdon021vy563"]
+
+[ext_resource type="Texture2D" uid="uid://du24sqc0k7emq" path="res://Assets/tabel_flip.png" id="1_vcg53"]
+[ext_resource type="Texture2D" uid="uid://dnit7gefe4wtf" path="res://Assets/tabel_select.png" id="2_qatai"]
+[ext_resource type="Texture2D" uid="uid://cwx8vf3j2je5i" path="res://Assets/tabel_flipH.png" id="3_qtb5g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4yjm"]
+atlas = ExtResource("2_qatai")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ciuj"]
+atlas = ExtResource("1_vcg53")
+region = Rect2(0, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xchxu"]
+atlas = ExtResource("1_vcg53")
+region = Rect2(80, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1sac"]
+atlas = ExtResource("1_vcg53")
+region = Rect2(160, 0, 80, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0j35"]
+atlas = ExtResource("3_qtb5g")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlqcf"]
+atlas = ExtResource("3_qtb5g")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jabmn"]
+atlas = ExtResource("3_qtb5g")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3glcq"]
+atlas = ExtResource("2_qatai")
+region = Rect2(80, 0, 80, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4yjm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ciuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xchxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1sac")
+}],
+"loop": false,
+"name": &"flipbot",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0j35")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlqcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jabmn")
+}],
+"loop": false,
+"name": &"fliptop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3glcq")
+}],
+"loop": false,
+"name": &"select",
+"speed": 5.0
+}]

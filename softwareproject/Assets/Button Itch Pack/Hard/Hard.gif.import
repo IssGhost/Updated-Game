@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://cb08bv2wifvmb"
+path="res://.godot/imported/Hard.gif-5a42f1fb3909de0d8e4b081b826cf9cd.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Hard/Hard.gif"
+dest_files=["res://.godot/imported/Hard.gif-5a42f1fb3909de0d8e4b081b826cf9cd.tres"]
+
+[params]
+
+frames_per_second=30

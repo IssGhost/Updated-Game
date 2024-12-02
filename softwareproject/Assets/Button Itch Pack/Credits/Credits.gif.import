@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://4abg2xmhpl6"
+path="res://.godot/imported/Credits.gif-93269936021e722d2005047b6fdaaf8f.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Credits/Credits.gif"
+dest_files=["res://.godot/imported/Credits.gif-93269936021e722d2005047b6fdaaf8f.tres"]
+
+[params]
+
+frames_per_second=30

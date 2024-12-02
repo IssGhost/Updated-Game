@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://853vca4rp8ov"
+path="res://.godot/imported/Sprite-Title.gif-a4ca8b08fc63dfe0deb81ff6543b2214.tres"
+
+[deps]
+
+source_file="res://InProgressArt/Sprite-Title.gif"
+dest_files=["res://.godot/imported/Sprite-Title.gif-a4ca8b08fc63dfe0deb81ff6543b2214.tres"]
+
+[params]
+
+frames_per_second=30

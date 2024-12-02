@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://cusgboqtxghdy"
+path="res://.godot/imported/Down.gif-6e84acdc2b7a0dc1c8052f100179e452.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Down/Down.gif"
+dest_files=["res://.godot/imported/Down.gif-6e84acdc2b7a0dc1c8052f100179e452.tres"]
+
+[params]
+
+frames_per_second=30

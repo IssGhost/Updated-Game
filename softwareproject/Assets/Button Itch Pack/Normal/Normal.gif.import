@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://dsp7pauvbqqgi"
+path="res://.godot/imported/Normal.gif-d94c570c7deee8847e725c5e3c097797.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Normal/Normal.gif"
+dest_files=["res://.godot/imported/Normal.gif-d94c570c7deee8847e725c5e3c097797.tres"]
+
+[params]
+
+frames_per_second=30

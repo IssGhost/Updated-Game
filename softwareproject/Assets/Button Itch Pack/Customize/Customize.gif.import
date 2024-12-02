@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://djf2d2lsjen2v"
+path="res://.godot/imported/Customize.gif-023be304b669715e245508c8e7bfb0c6.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/Customize/Customize.gif"
+dest_files=["res://.godot/imported/Customize.gif-023be304b669715e245508c8e7bfb0c6.tres"]
+
+[params]
+
+frames_per_second=30

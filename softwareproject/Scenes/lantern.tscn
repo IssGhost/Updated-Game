@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2ieghykeis8y"]
+
+[ext_resource type="SpriteFrames" uid="uid://obm0oi514nhq" path="res://Scenes/lantern.tres" id="1_akvgp"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_akvgp")
+autoplay = "default"
+frame_progress = 0.466064

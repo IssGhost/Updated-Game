@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://dyuyot8lcara6"
+path="res://.godot/imported/RightKey.gif-91411fa19ba00dfbd68b89c4485ddf93.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/RightKey/RightKey.gif"
+dest_files=["res://.godot/imported/RightKey.gif-91411fa19ba00dfbd68b89c4485ddf93.tres"]
+
+[params]
+
+frames_per_second=30

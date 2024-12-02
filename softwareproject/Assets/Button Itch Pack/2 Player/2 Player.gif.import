@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://yrwj1evg56p6"
+path="res://.godot/imported/2 Player.gif-a6490792cfbe2762d2a4df53388bb92e.tres"
+
+[deps]
+
+source_file="res://Assets/Button Itch Pack/2 Player/2 Player.gif"
+dest_files=["res://.godot/imported/2 Player.gif-a6490792cfbe2762d2a4df53388bb92e.tres"]
+
+[params]
+
+frames_per_second=30
