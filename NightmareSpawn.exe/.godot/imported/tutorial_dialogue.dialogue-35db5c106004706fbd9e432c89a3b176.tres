@@ -1,0 +1,177 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_1bvcn"]
+
+[resource]
+script = ExtResource("1_1bvcn")
+using_states = PackedStringArray()
+titles = {
+"this_is_a_node_title": "2"
+}
+character_names = PackedStringArray("Voices")
+first_title = "2"
+lines = {
+"1": {
+"id": "1",
+"next_id": "2",
+"text": "this_is_a_node_title",
+"type": &"title"
+},
+"10": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "10",
+"next_id": "11",
+"next_id_after": "12",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "\"Wait, I don't know if I'm ready.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"Wait, I don't know if I'm ready.\"",
+"type": &"response"
+},
+"11": {
+"character": "Voices",
+"character_replacements": Array[Dictionary]([]),
+"id": "11",
+"next_id": "end",
+"notes": "",
+"parent_id": "10",
+"tags": PackedStringArray(),
+"text": "\"Hesitate, if you wish. But know, the journey will only begin once you rest.\".",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"Hesitate, if you wish. But know, the journey will only begin once you rest.\".",
+"type": &"dialogue"
+},
+"12": {
+"id": "12",
+"is_snippet": false,
+"next_id": "end",
+"type": &"goto"
+},
+"2": {
+"character": "Voices",
+"character_replacements": Array[Dictionary]([]),
+"id": "2",
+"next_id": "3",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "\"Come... rest your weary head.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"Come... rest your weary head.\"",
+"type": &"dialogue"
+},
+"3": {
+"character": "Voices",
+"character_replacements": Array[Dictionary]([]),
+"id": "3",
+"next_id": "4",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "\"This bed has seen many travelers before you... few have returned.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"This bed has seen many travelers before you... few have returned.\"",
+"type": &"dialogue"
+},
+"4": {
+"character": "Voices",
+"character_replacements": Array[Dictionary]([]),
+"id": "4",
+"next_id": "5",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "\"Are you truly ready for what awaits? Once you close your eyes, this place will be only a memory.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"Are you truly ready for what awaits? Once you close your eyes, this place will be only a memory.\"",
+"type": &"dialogue"
+},
+"5": {
+"character": "Voices",
+"character_replacements": Array[Dictionary]([]),
+"id": "5",
+"next_id": "6",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "\"Make your choice... stay in comfort, or drift into the unknown.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"Make your choice... stay in comfort, or drift into the unknown.\"",
+"type": &"dialogue"
+},
+"6": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "6",
+"next_id": "7",
+"next_id_after": "12",
+"notes": "",
+"responses": PackedStringArray("6", "10"),
+"tags": PackedStringArray(),
+"text": "\"I'm ready. I need to move forward.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"I'm ready. I need to move forward.\"",
+"type": &"response"
+},
+"7": {
+"character": "Voices",
+"character_replacements": Array[Dictionary]([]),
+"id": "7",
+"next_id": "8",
+"notes": "",
+"parent_id": "6",
+"tags": PackedStringArray(),
+"text": "\"You feel a weight lift as you lie down, but a sense of finality settles over you.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"You feel a weight lift as you lie down, but a sense of finality settles over you.\"",
+"type": &"dialogue"
+},
+"8": {
+"character": "Voices",
+"character_replacements": Array[Dictionary]([]),
+"id": "8",
+"next_id": "9",
+"notes": "",
+"parent_id": "6",
+"tags": PackedStringArray(),
+"text": "\"There is no going back. When you wake, the world will be... different.\"",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "\"There is no going back. When you wake, the world will be... different.\"",
+"type": &"dialogue"
+},
+"9": {
+"id": "9",
+"mutation": {
+"expression": Array[Dictionary]([{
+"type": "variable",
+"value": "Globals"
+}, {
+"type": "dot"
+}, {
+"type": "variable",
+"value": "transition_to_boss_room"
+}, {
+"type": "dot"
+}, {
+"function": "emit",
+"type": &"function",
+"value": Array[Array]([])
+}]),
+"is_blocking": true
+},
+"next_id": "12",
+"parent_id": "6",
+"type": &"mutation"
+}
+}
+raw_text = "~ this_is_a_node_title
+Voices: \"Come... rest your weary head.\"
+Voices: \"This bed has seen many travelers before you... few have returned.\"
+Voices: \"Are you truly ready for what awaits? Once you close your eyes, this place will be only a memory.\"
+Voices: \"Make your choice... stay in comfort, or drift into the unknown.\"
+- \"I'm ready. I need to move forward.\"
+	Voices: \"You feel a weight lift as you lie down, but a sense of finality settles over you.\"
+	Voices: \"There is no going back. When you wake, the world will be... different.\"
+	do Globals.transition_to_boss_room.emit()
+- \"Wait, I don't know if I'm ready.\"
+	Voices: \"Hesitate, if you wish. But know, the journey will only begin once you rest.\".  => END
+=> END"
+metadata/dialogue_manager_version = "2.44.0"

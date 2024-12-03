@@ -107,7 +107,7 @@ script = ExtResource("1_nmbjp")
 collision_layer = 2
 
 [node name="Area2D" type="Area2D" parent="StaticBody2D"]
-collision_layer = 32769
+collision_layer = 32768
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
 position = Vector2(-0.25, 0.75)

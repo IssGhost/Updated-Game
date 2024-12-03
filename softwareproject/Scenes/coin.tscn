@@ -55,7 +55,7 @@ script = ExtResource("1_cbumd")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ajimn")
 autoplay = "default"
-frame_progress = 0.687249
+frame_progress = 0.968788
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 255

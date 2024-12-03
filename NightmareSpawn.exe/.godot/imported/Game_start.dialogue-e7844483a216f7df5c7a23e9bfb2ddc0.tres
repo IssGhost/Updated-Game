@@ -1,0 +1,152 @@
+[gd_resource type="Resource" script_class="DialogueResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_resource.gd" id="1_nut17"]
+
+[resource]
+script = ExtResource("1_nut17")
+using_states = PackedStringArray()
+titles = {
+"intro_dialogue": "2"
+}
+character_names = PackedStringArray("")
+first_title = "2"
+lines = {
+"1": {
+"id": "1",
+"next_id": "2",
+"text": "intro_dialogue",
+"type": &"title"
+},
+"10": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "10",
+"next_id": "11",
+"next_id_after": "12",
+"notes": "",
+"responses": PackedStringArray("10"),
+"tags": PackedStringArray(),
+"text": "Begin the journey",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Begin the journey",
+"type": &"response"
+},
+"11": {
+"id": "11",
+"mutation": {
+"expression": Array[Dictionary]([{
+"function": "end_scene",
+"type": &"function",
+"value": Array[Array]([])
+}]),
+"is_blocking": true
+},
+"next_id": "12",
+"parent_id": "10",
+"type": &"mutation"
+},
+"12": {
+"id": "12",
+"is_snippet": false,
+"next_id": "end",
+"type": &"goto"
+},
+"2": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "2",
+"next_id": "3",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "You feel yourself stirring in the darkness...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "You feel yourself stirring in the darkness...",
+"type": &"dialogue"
+},
+"3": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "3",
+"next_id": "4",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Your mind is hazy, memories fragmented.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Your mind is hazy, memories fragmented.",
+"type": &"dialogue"
+},
+"4": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "4",
+"next_id": "5",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "The last thing you remember is lying down to sleep...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "The last thing you remember is lying down to sleep...",
+"type": &"dialogue"
+},
+"5": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "5",
+"next_id": "6",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "But now, you're here, in this strange, dark room...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "But now, you're here, in this strange, dark room...",
+"type": &"dialogue"
+},
+"6": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "6",
+"next_id": "7",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "Your heart races. You don’t know where you are or why you’re here.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "Your heart races. You don’t know where you are or why you’re here.",
+"type": &"dialogue"
+},
+"7": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "7",
+"next_id": "8",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "In a moment of clarity, you fumble around and find your lantern.",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "In a moment of clarity, you fumble around and find your lantern.",
+"type": &"dialogue"
+},
+"8": {
+"character": "",
+"character_replacements": Array[Dictionary]([]),
+"id": "8",
+"next_id": "10",
+"notes": "",
+"tags": PackedStringArray(),
+"text": "You click it on, and the room is bathed in dim light...",
+"text_replacements": Array[Dictionary]([]),
+"translation_key": "You click it on, and the room is bathed in dim light...",
+"type": &"dialogue"
+}
+}
+raw_text = "~ intro_dialogue
+: You feel yourself stirring in the darkness...
+: Your mind is hazy, memories fragmented.
+: The last thing you remember is lying down to sleep...
+: But now, you're here, in this strange, dark room...
+: Your heart races. You don’t know where you are or why you’re here.
+: In a moment of clarity, you fumble around and find your lantern.
+: You click it on, and the room is bathed in dim light...
+
+- Begin the journey 
+	do end_scene()
+=> END
+"
+metadata/dialogue_manager_version = "2.44.0"

@@ -389,6 +389,7 @@ script = ExtResource("19_2m4g1")
 
 [node name="Heart_item" parent="." instance=ExtResource("20_k2raa")]
 position = Vector2(696, 57)
+scale = Vector2(1, 1)
 
 [node name="Coin" parent="." instance=ExtResource("15_xcj6t")]
 position = Vector2(673, 25)

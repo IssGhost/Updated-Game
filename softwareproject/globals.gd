@@ -1,6 +1,5 @@
 extends Node
 
-var is_finished: String = ""
 var coin_count: int = 0
 
 @export var player_max_health: int = 100
@@ -12,21 +11,20 @@ var player_current_health: int = player_max_health
 var player_attack_damage: int = 100
 var base_attack_damage: int = 100
 
-# Total health of all slimes (used for boss health tracking)
 var total_slime_health: int = 0
 
 signal transition_to_boss_room
 signal health_changed(new_health)
 signal ammo_changed(current_ammo)
-signal damage_changed(new_damage)
+signal damage_changxed(new_damage)
 signal max_health_changed(new_max_health)
-signal total_slime_health_changed(new_total_health)  # New signal for slime health
+signal total_slime_health_changed(new_total_health)  
 
 func increase_max_health(amount: int) -> void:
 	player_max_health += amount
-	player_current_health += amount  # Heal to match the new max health
+	player_current_health += amount 
 	emit_signal("max_health_changed", player_max_health)
-	emit_signal("health_changed", player_current_health)  # Update health too
+	emit_signal("health_changed", player_current_health)  
 	print("Max health increased to:", player_max_health)
 	
 func increase_damage(amount: int, duration: float) -> void:
@@ -64,19 +62,16 @@ func reset_coins():
 	coin_count = 0
 
 func take_damage(amount: int) -> void:
-	# Reduce health and emit signal
 	player_current_health -= amount
 	player_current_health = clamp(player_current_health, 0, player_max_health)
 	emit_signal("health_changed", player_current_health)
 
 func heal(amount: int) -> void:
-	# Heal player and emit signal
 	player_current_health += amount
 	player_current_health = clamp(player_current_health, 0, player_max_health)
 	emit_signal("health_changed", player_current_health)
 
 func reset_health():
-	# Reset health to maximum
 	player_current_health = player_max_health
 	emit_signal("health_changed", player_current_health)
 
