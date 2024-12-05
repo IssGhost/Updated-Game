@@ -8,6 +8,8 @@ var current_health: int = max_health  # Start with full health
 @export var boss_max_health: int = 1000  # To be set when entering boss room
 var boss_current_health: int = 1000
 
+@onready var weapon_sprite: AnimatedSprite2D = $Weapon/AnimatedSprite2D
+@onready var flamethrower_animation: String = "flamethrower" 
 @onready var heart_scene = preload("res://Scenes/Heart.tscn")
 @onready var health_container = $HealthContainer
 @onready var boss_health_bar: ProgressBar = $BossHealthBar  # Reference to the boss health bar
@@ -15,6 +17,7 @@ var boss_current_health: int = 1000
 @onready var ammo_label: RichTextLabel = $Weapon/RichTextLabel # Adjust path as needed
 @onready var damageboost: Sprite2D = $Control/Sprite2D
 func _ready():
+	Globals.connect("current_weapon_UI", Callable(self, "_on_weapon_changed"))
 	Globals.connect("health_changed", Callable(self, "update_hearts"))
 	Globals.connect("max_health_changed", Callable(self, "update_hearts"))  # Update when max health changes
 	update_hearts(Globals.player_current_health)  # Initialize with the current global health
@@ -25,6 +28,19 @@ func _ready():
 	# Hide boss health bar initially
 	boss_health_bar.visible = false
 	
+func _on_weapon_changed(new_weapon: String) -> void:
+	print("Weapon changes to test:", new_weapon)
+	if new_weapon == "flamethrower":
+		play_flamethrower_animation()
+	if new_weapon == "default_gun":
+		weapon_sprite.play("default")
+
+func play_flamethrower_animation() -> void:
+	if weapon_sprite.animation != flamethrower_animation:
+		weapon_sprite.play(flamethrower_animation)
+		print("playing flamethrower animation")
+	else:
+		print("flamethower animation already player")
 func update_ammo_label(current_ammo: int) -> void:
 	ammo_label.text = str(current_ammo) + "/" + str(Globals.max_ammo)
 	

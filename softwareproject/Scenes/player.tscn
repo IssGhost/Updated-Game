@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bunoftyokcv2c"]
+[gd_scene load_steps=41 format=3 uid="uid://bunoftyokcv2c"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_menar"]
 [ext_resource type="Texture2D" uid="uid://b3g3dcgdawv1y" path="res://mystic_woods_free_2.2/sprites/characters/player.png" id="2_uwhhb"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cxpil641mvdp6" path="res://Sounds/slash-21834.mp3" id="7_18ufr"]
 [ext_resource type="Texture2D" uid="uid://dy4ps7g1l6udn" path="res://mystic_woods_free_2.2/sprites/characters/player_hands.png" id="10_3ypld"]
 [ext_resource type="PackedScene" uid="uid://c4vd6qifpggws" path="res://Weapons/ar_gun.tscn" id="11_6gihy"]
+[ext_resource type="PackedScene" uid="uid://dg7rof0p0r3ru" path="res://Weapons/flamethrower_gun.tscn" id="11_ph8st"]
 [ext_resource type="Script" path="res://scripts/coin_count.gd" id="12_2u2w7"]
 [ext_resource type="FontFile" uid="uid://beotr6g48md11" path="res://m5x7.ttf" id="13_be8q7"]
 
@@ -219,6 +220,30 @@ tracks/16/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Node2D/Flamethrower:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.52588e-05, -4.57764e-05)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Node2D/Flamethrower:z_index")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_s8xx5"]
@@ -630,6 +655,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [4.71239]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Node2D/Flamethrower:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3, 14)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Node2D/Flamethrower:z_index")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
 }
 
 [sub_resource type="Animation" id="Animation_n2sri"]
@@ -1112,6 +1161,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [1.5708]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Node2D/Flamethrower:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 15)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Node2D/Flamethrower:z_index")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
 
 [sub_resource type="Animation" id="Animation_qx33r"]
 resource_name = "left_attack"
@@ -1546,6 +1619,18 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [3.14159]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Node2D/Flamethrower:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, 3)]
 }
 
 [sub_resource type="Animation" id="Animation_xjt6e"]
@@ -2066,12 +2151,17 @@ position = Vector2(0, 12)
 scale = Vector2(0.15, 0.15)
 
 [node name="ArGun" parent="Node2D" instance=ExtResource("11_6gihy")]
+visible = false
 
 [node name="Sprite2D" parent="Node2D/ArGun" index="0"]
 z_index = 1
 
 [node name="AudioStreamPlayer2D" parent="Node2D/ArGun" index="3"]
 autoplay = false
+
+[node name="Flamethrower" parent="Node2D" instance=ExtResource("11_ph8st")]
+position = Vector2(-1.52588e-05, -4.57764e-05)
+scale = Vector2(1.2, 1.2)
 
 [node name="Hands" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -2135,3 +2225,4 @@ text = "DMG UP"
 [editable path="AttackBox"]
 [editable path="Hurtbox"]
 [editable path="Node2D/ArGun"]
+[editable path="Node2D/Flamethrower"]

@@ -10,7 +10,10 @@ var current_ammo: int = max_ammo
 var player_current_health: int = player_max_health
 var player_attack_damage: int = 100
 var base_attack_damage: int = 100
-
+var player_weapons: Array = ["default_gun"]
+var current_weapon: String = ""
+var current_weapon_index: int = 0
+var player_current_wearpon: String = ""
 var total_slime_health: int = 0
 
 signal transition_to_boss_room
@@ -19,7 +22,23 @@ signal ammo_changed(current_ammo)
 signal damage_changxed(new_damage)
 signal max_health_changed(new_max_health)
 signal total_slime_health_changed(new_total_health)  
+signal current_weapon_UI()
 
+func add_weapon(weapon_type: String) -> void:
+	if not player_weapons.has(weapon_type):
+		player_weapons.append(weapon_type)
+		print("Weapon added to inventory:", weapon_type)
+
+func swap_weapon():
+	if player_weapons.size() > 1:
+		current_weapon_index = (current_weapon_index + 1) % player_weapons.size()
+		current_weapon = player_weapons[current_weapon_index]
+		emit_signal("current_weapon_UI", current_weapon)
+		print("Switched to weapon:", current_weapon)
+	else:
+		print("Only default gun available.")
+		current_weapon = "flamethrower"
+		
 func increase_max_health(amount: int) -> void:
 	player_max_health += amount
 	player_current_health += amount 

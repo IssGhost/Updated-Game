@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cda66er23xy56"]
 
-[ext_resource type="Script" path="res://scripts/item_pickup.gd" id="1_58pu5"]
 [ext_resource type="Texture2D" uid="uid://xren4uy4d6he" path="res://Assets/ar_item_sheet.png" id="1_alq5o"]
+[ext_resource type="Script" path="res://scripts/Ar_pickup.gd" id="1_b52ub"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qkjwe"]
 atlas = ExtResource("1_alq5o")
@@ -36,7 +36,7 @@ height = 122.0
 
 [node name="Area2D" type="Area2D"]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_58pu5")
+script = ExtResource("1_b52ub")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nd5or")

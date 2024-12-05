@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b0n6nnxfmc8ab"]
+[gd_scene load_steps=29 format=3 uid="uid://b0n6nnxfmc8ab"]
 
 [ext_resource type="Script" path="res://health_ui.gd" id="1_kp2hk"]
 [ext_resource type="PackedScene" uid="uid://c52shjr7m8dbb" path="res://Scenes/ActivatableBox.tscn" id="2_75ci4"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d1s8uyp8mfmv" path="res://Scenes/WeaponBox.tscn" id="4_43ea6"]
 [ext_resource type="Texture2D" uid="uid://dayo73chhcqdg" path="res://Weapons/Guns/AnimatedAR.png" id="5_fafjv"]
 [ext_resource type="Texture2D" uid="uid://xqwqqfacldw6" path="res://Assets/coin.png" id="7_gq8a3"]
+[ext_resource type="Texture2D" uid="uid://4i1u3wjcs5q5" path="res://Weapons/Flamethrower_itemshine-Sheet.png" id="7_t6krh"]
 [ext_resource type="Script" path="res://scripts/coin_count.gd" id="8_enutw"]
 [ext_resource type="Texture2D" uid="uid://d172kdv00oan1" path="res://Assets/955-9550236_red-vignette-background-peach.png" id="9_f0hlx"]
 
@@ -44,6 +45,38 @@ region = Rect2(625, 0, 125, 68)
 atlas = ExtResource("5_fafjv")
 region = Rect2(750, 0, 125, 68)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_88ndu"]
+atlas = ExtResource("7_t6krh")
+region = Rect2(0, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7bu2"]
+atlas = ExtResource("7_t6krh")
+region = Rect2(96, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ew47b"]
+atlas = ExtResource("7_t6krh")
+region = Rect2(192, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbww7"]
+atlas = ExtResource("7_t6krh")
+region = Rect2(288, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7eih"]
+atlas = ExtResource("7_t6krh")
+region = Rect2(384, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ff6m"]
+atlas = ExtResource("7_t6krh")
+region = Rect2(480, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_leiuq"]
+atlas = ExtResource("7_t6krh")
+region = Rect2(576, 0, 96, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2tuv"]
+atlas = ExtResource("7_t6krh")
+region = Rect2(672, 0, 96, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3rcrb"]
 animations = [{
 "frames": [{
@@ -71,12 +104,39 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_88ndu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7bu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ew47b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbww7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7eih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ff6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_leiuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2tuv")
+}],
+"loop": true,
+"name": &"flamethrower",
+"speed": 10.0
 }]
 
 [node name="HealthUI" type="CanvasLayer"]
 script = ExtResource("1_kp2hk")
-max_health = null
-boss_max_health = null
 
 [node name="HealthContainer" type="HBoxContainer" parent="."]
 offset_left = 10.0
@@ -140,7 +200,9 @@ tab_size = 3
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Weapon"]
 position = Vector2(80, 32)
 sprite_frames = SubResource("SpriteFrames_3rcrb")
+animation = &"flamethrower"
 autoplay = "default"
+frame_progress = 0.191005
 
 [node name="CoinCounter" type="Control" parent="."]
 layout_mode = 3

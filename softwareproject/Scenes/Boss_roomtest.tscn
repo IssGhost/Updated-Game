@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dcn7m7f3npdg0"]
+[gd_scene load_steps=35 format=3 uid="uid://dcn7m7f3npdg0"]
 
 [ext_resource type="Script" path="res://Scenes/boss_roomtest_transition.gd" id="1_6306b"]
 [ext_resource type="Texture2D" uid="uid://x54i0qq8lois" path="res://Assets/Imported Free Assets/0x72_DungeonTilesetII_v1.7/0x72_DungeonTilesetII_v1.7.png" id="1_kqx0l"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://pwcafr5qw256" path="res://Sounds/evil-boss-appears-short-instrumental-178343.mp3" id="18_atnjj"]
 [ext_resource type="Script" path="res://scripts/boss_music.gd" id="19_2m4g1"]
 [ext_resource type="PackedScene" uid="uid://cjnkrw74xc36b" path="res://Scenes/heart_item.tscn" id="20_k2raa"]
+[ext_resource type="PackedScene" uid="uid://dti16uvv58o53" path="res://Scenes/flamethrower_item.tscn" id="21_k5n15"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5ky2"]
 atlas = ExtResource("1_kqx0l")
@@ -299,9 +300,6 @@ scale = Vector2(1, 1)
 [node name="CollisionShape2D" parent="player" index="2"]
 disabled = false
 
-[node name="ArGun" parent="player/Node2D" index="0"]
-visible = false
-
 [node name="Camera2D" parent="player" index="12"]
 zoom = Vector2(10, 10)
 
@@ -411,6 +409,9 @@ scale = Vector2(0.5, 0.5)
 position = Vector2(673, 25)
 scale = Vector2(0.5, 0.5)
 
+[node name="flamethrower" parent="." instance=ExtResource("21_k5n15")]
+position = Vector2(628, 49)
+
 [connection signal="body_entered" from="Spike/Area2D12" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D11" to="Spike" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Spike/Area2D10" to="Spike" method="_on_area_2d_body_entered"]
@@ -432,6 +433,7 @@ scale = Vector2(0.5, 0.5)
 [editable path="player/AttackBox"]
 [editable path="player/Hurtbox"]
 [editable path="player/Node2D/ArGun"]
+[editable path="player/Node2D/Flamethrower"]
 [editable path="Slimeboss"]
 [editable path="Slimeboss/AttackBox"]
 [editable path="HealthUI"]
