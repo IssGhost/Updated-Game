@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 signal health_changed(new_health)  # Signal to notify health changes
 
-@onready var flamethrower_particles: GPUParticles2D = $Node2D/FlamethrowerParticles  # Adjust the path
 @onready var dmg_up_label: Label = $Damageup
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var gunanim: AnimationTree = $Node2D/ArGun/AnimationTree
@@ -42,7 +41,6 @@ var current_health: int = max_health
 
 func _ready():
 	anim.play("front_idle")
-	Globals.connect("current_weapon_UI", Callable(self, "_on_weapon_changed"))
 	attack_box.connect("body_entered", Callable(self, "_on_attack_box_body_entered"))
 	anim.connect("animation_finished", Callable(self, "_on_animation_finished"))
 	add_to_group("player")
@@ -143,11 +141,10 @@ func _input(event):
 	if event.is_action_pressed("attack"):
 		attack()
 	if event.is_action_pressed("shoot") and shoot_timer.is_stopped():
-		shoot()
+		shoot_gun()
 		shoot_timer.start()
 	elif event.is_action_released("shoot"):
 		shoot_timer.stop()
-		stop_shooting()
 	if event.is_action_pressed("dodge") and not is_dodging:  # Add dodge input
 		start_dodge()
 	if event.is_action_pressed("reload"):  # Define "reload" in your Input Map
@@ -157,7 +154,7 @@ func _input(event):
 		Globals.swap_weapon()
 
 func _on_shoot_timer_timeout():
-	shoot()
+	shoot_gun()
 	
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("dialogue"):
@@ -208,46 +205,36 @@ func _end_dodge():
 		hurt_box.set("disabled", false)  # Re-enable hurtbox collision
 		speed /= dodge_speed_multiplier  # Reset speed
 
-		
-func _on_weapon_changed(new_weapon: String) -> void:
-	Globals.current_weapon = new_weapon
-	print("Switched to weapon:", new_weapon)
-	# Stop flamethrower particles if switching away from flamethrower
-	if new_weapon != "flamethrower":
-		flamethrower_particles.emitting = false
-		
-func shoot():
-	if Globals.current_weapon == "default_gun":
-		shoot_default_gun()
-	elif Globals.current_weapon == "flamethrower":
-		shoot_flamethrower()
 
-func shoot_default_gun():
+func current_gun():
+	if Globals.current_weapon == null:
+		Globals.current_weapon = ar_gun		
+	
+func shoot_gun():
+	if is_dodging or !reload_timer.is_stopped():
+		return  # Prevent shooting while reloading or dodging
+
 	if Globals.current_ammo > 0:
 		Globals.decrement_ammo()
 		_update_health_ui_ammo_label()
+
+		# Fire the gun (existing logic here)
 		var bullet = gun_fire_scene.instantiate()
 		match current_dir:
 			"right": bullet.direction = Vector2(1, 0)
 			"left": bullet.direction = Vector2(-1, 0)
 			"down": bullet.direction = Vector2(0, 1)
 			"up": bullet.direction = Vector2(0, -1)
-		bullet.global_position = gun.global_position
-		get_tree().current_scene.add_child(bullet)
-		print("Fired default gun bullet.")
-	else:
-		print("Out of ammo for default gun.")
-		start_reloading()
+		bullet.global_position = gun.global_position + bullet.direction * gun.gun_length
 		
-func shoot_flamethrower():
-	if !flamethrower_particles.emitting:
-		flamethrower_particles.emitting = true
-		print("Firing flamethrower.")
+		# Debug logs
+		print("Bullet instantiated at:", bullet.global_position)
+		print("Gun global position:", gun.global_position)
+		print("Gun direction:", bullet.direction)
 
-func stop_shooting():
-	if Globals.current_weapon == "flamethrower":
-		flamethrower_particles.emitting = false
-		print("Stopped firing flamethrower.")
+		get_tree().current_scene.add_child(bullet)
+	else:
+		start_reloading()
 
 
 func start_reloading():

@@ -11,7 +11,6 @@ var player_current_health: int = player_max_health
 var player_attack_damage: int = 100
 var base_attack_damage: int = 100
 var player_weapons: Array = ["default_gun"]
-var current_weapon: String = ""
 var current_weapon_index: int = 0
 var player_current_wearpon: String = ""
 var total_slime_health: int = 0
@@ -32,12 +31,11 @@ func add_weapon(weapon_type: String) -> void:
 func swap_weapon():
 	if player_weapons.size() > 1:
 		current_weapon_index = (current_weapon_index + 1) % player_weapons.size()
-		current_weapon = player_weapons[current_weapon_index]
-		emit_signal("current_weapon_UI", current_weapon)
-		print("Switched to weapon:", current_weapon)
+		var new_weapon = player_weapons[current_weapon_index]
+		print("Switched to weapon:", new_weapon)
+		emit_signal("current_weapon_UI", new_weapon)
 	else:
-		print("Only default gun available.")
-		current_weapon = "flamethrower"
+		print("Only one weapon available!")
 		
 func increase_max_health(amount: int) -> void:
 	player_max_health += amount
