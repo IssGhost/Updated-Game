@@ -54,7 +54,7 @@ disabled = false
 zoom = Vector2(5, 5)
 
 [node name="Camera2D2" type="Camera2D" parent="TileMap/player"]
-zoom = Vector2(4, 4)
+zoom = Vector2(0.5, 0.5)
 
 [node name="Area2DContainer" type="Node" parent="TileMap"]
 
@@ -70,8 +70,6 @@ color = Color(0, 0, 0, 1)
 color = Color(0, 0, 0, 1)
 
 [node name="Control" parent="." instance=ExtResource("9_20blq")]
-max_health = 100
-boss_max_health = 1000
 
 [node name="BossHealthBar" parent="Control" index="1"]
 offset_left = 0.0
@@ -89,5 +87,6 @@ autoplay = true
 [editable path="TileMap/player/AttackBox"]
 [editable path="TileMap/player/Hurtbox"]
 [editable path="TileMap/player/Node2D/ArGun"]
+[editable path="TileMap/player/Node2D/Flamethrower"]
 [editable path="Control"]
 [editable path="Control/Activatable/Activatable_item"]

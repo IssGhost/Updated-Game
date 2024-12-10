@@ -2151,7 +2151,6 @@ position = Vector2(0, 12)
 scale = Vector2(0.15, 0.15)
 
 [node name="ArGun" parent="Node2D" instance=ExtResource("11_6gihy")]
-visible = false
 
 [node name="Sprite2D" parent="Node2D/ArGun" index="0"]
 z_index = 1
@@ -2160,6 +2159,7 @@ z_index = 1
 autoplay = false
 
 [node name="Flamethrower" parent="Node2D" instance=ExtResource("11_ph8st")]
+visible = false
 position = Vector2(-1.52588e-05, -4.57764e-05)
 scale = Vector2(1.2, 1.2)
 
